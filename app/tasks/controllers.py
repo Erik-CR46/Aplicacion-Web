@@ -2,9 +2,9 @@ from flask import Blueprint
 
 taskRoute = Blueprint('tasks', __name__, url_prefix='/tasks')
 
-@taskRoute.route('/')
-def index():
-    return "Index"
+#@taskRoute.route('/')
+#def index():
+#    return "Index"
 
 @taskRoute.route('/<int:id>')
 def show(id:int):
