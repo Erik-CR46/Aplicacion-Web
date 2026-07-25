@@ -3,17 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    {% block title %} <title></title> {% endblock %}
 </head>
 <body>
-    <h1>Template example</h1>
-    <p>Hello Flask</p>
 
-    {{name}}
-
-    {% if name == 'erik' %}
-        Hola Erik
-    {% endif %}
-
+    <div>
+        {% block content %}
+        {% endblock %}
+    </div>
+    
 </body>
 </html>

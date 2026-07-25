@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %} Index task {% endblock %}
+
+{% block content %} 
+
+<ul>
+    {% for i in task_list%}
+        <li>{{i}}</li>
+        <a href="/tasks/update/{{loop.index0}}">Edit</a>
+    {% endfor %}
+</ul>
+    
+{% endblock %}
+
