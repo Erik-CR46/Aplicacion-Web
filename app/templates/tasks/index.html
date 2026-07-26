@@ -3,13 +3,15 @@
 {% block title %} Index task {% endblock %}
 
 {% block content %} 
+        <a href="{{ url_for('tasks.create')}}">Create</a>
 
-<ul>
-    {% for i in task_list%}
-        <li>{{i}}</li>
-        <a href="/tasks/update/{{loop.index0}}">Edit</a>
-    {% endfor %}
-</ul>
-    
+        <ul>
+            {% for i in task_list%}
+                <li>{{i}}</li>
+                <a href="{{ url_for('tasks.update', id=loop.index0) }}">Edit</a>
+                <a href="{{ url_for('tasks.delete', id=loop.index0)}}">Delete</a>
+            {% endfor %}
+        </ul>
+   
 {% endblock %}
 

@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, redirect, url_for
 
 taskRoute = Blueprint('tasks', __name__, url_prefix='/tasks')
 
@@ -11,17 +11,23 @@ def index():
 @taskRoute.route('/create', methods=('GET', 'POST'))
 def create():
     task = request.form.get('task')
-    if task is not None:
+    if task is not None and task != '':
         task_list.append(task)
+        return redirect(url_for('tasks.index'))
     return render_template("tasks/create.html")
 
 @taskRoute.route('/delete/<int:id>')
 def delete(id:int):
-    return 'Delete ' + str(id) 
+    del task_list[id]
+    return redirect(url_for('tasks.index'))
 
 @taskRoute.route('/update/<int:id>', methods=['GET', 'POST'])
 def update(id:int):
     task = request.form.get('task')
-    if id >= 0 or id <= len(task_list):
-        task_list[id] = task
+    if id is not None:
+        if id >= 0 or id <= len(task_list):
+            if task is not None and task != '':
+                task_list[id] = task
+                return redirect(url_for('tasks.index'))
+
     return render_template("tasks/update.html")
