@@ -1,7 +1,14 @@
-from flask import Flask, render_template, request
+from flask import Flask
 from app.config import DevelopmentConfig
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.config.from_object(DevelopmentConfig)
 
-from app.tasks import views
+db = SQLAlchemy(app)
+
+from app.tasks.controllers import taskRoute
+app.register_blueprint(taskRoute)
+
+with app.app_context():
+    db.create_all()
