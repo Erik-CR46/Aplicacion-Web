@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for
-from app.tasks.models import Task
+from app.tasks import operations
 
 taskRoute = Blueprint('tasks', __name__, url_prefix='/tasks')
 
@@ -7,6 +7,14 @@ task_list = [1,2,3]
 
 @taskRoute.route('/')
 def index():
+
+    #operations.create("Task")
+    #operations.update(1,"hola")
+    #print(operations.getById(2))
+    #print(operations.getAll())
+    #print(operations.delete(4))
+    #print(operations.pagination().items)
+
     return render_template("tasks/index.html", task_list= task_list)
 
 @taskRoute.route('/create', methods=('GET', 'POST'))
