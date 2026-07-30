@@ -1,0 +1,25 @@
+{{form.name.label}}
+{{form.name}}
+
+{% if form.name.errors %}
+    <u>
+        {% for i in form.name.error %}
+            <li>
+                {{ i }}
+            </li>
+        {% endfor %}
+    </u>
+{% endif %}
+
+{% if form.errors %}
+    <u>
+        {% for i in form.error %}
+            <li>
+                {{ i }}
+            </li>
+        {% endfor %}
+    </u>
+{% endif %}
+
+{{form.csrf_token}}
+<button type="submit"> Send </button>

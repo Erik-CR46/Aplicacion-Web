@@ -7,9 +7,9 @@
 
         <ul>
             {% for i in task_list%}
-                <li>{{i}}</li>
-                <a href="{{ url_for('tasks.update', id=loop.index0) }}">Edit</a>
-                <a href="{{ url_for('tasks.delete', id=loop.index0)}}">Delete</a>
+                <li>{{i.model}}</li>
+                <a href="{{ url_for('tasks.update', id=i.id) }}">Edit</a>
+                <a href="{{ url_for('tasks.delete', id=i.id)}}">Delete</a>
             {% endfor %}
         </ul>
    

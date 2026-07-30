@@ -3,9 +3,8 @@
 {% block title %} Create {% endblock %}
 
 {% block content %} 
-<form action="" method="post">
-    <input type="text" name="task">
-    <button type="submit"> Send </button>
-</form>
+    <form action="" method="post">
+        {% include 'tasks/_form.html'%}
+    </form>
 {% endblock %}
 
