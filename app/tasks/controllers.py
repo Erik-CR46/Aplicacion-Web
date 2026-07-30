@@ -1,9 +1,8 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 from app.tasks import operations
+from app.tasks import forms
 
 taskRoute = Blueprint('tasks', __name__, url_prefix='/tasks')
-
-task_list = [1,2,3]
 
 @taskRoute.route('/')
 def index():
@@ -15,28 +14,31 @@ def index():
     #print(operations.delete(4))
     #print(operations.pagination().items)
 
-    return render_template("tasks/index.html", task_list= task_list)
+    return render_template("tasks/index.html", task_list= operations.getAll())
 
 @taskRoute.route('/create', methods=('GET', 'POST'))
 def create():
-    task = request.form.get('task')
-    if task is not None and task != '':
-        task_list.append(task)
+    form = forms.Task()
+    if form.validate_on_submit():
+        operations.create(form.name.data)
         return redirect(url_for('tasks.index'))
-    return render_template("tasks/create.html")
+    return render_template("tasks/create.html", form=form)
 
 @taskRoute.route('/delete/<int:id>')
 def delete(id:int):
-    del task_list[id]
+    operations.delete(id)
     return redirect(url_for('tasks.index'))
 
 @taskRoute.route('/update/<int:id>', methods=['GET', 'POST'])
 def update(id:int):
-    task = request.form.get('task')
-    if id is not None:
-        if id >= 0 or id <= len(task_list):
-            if task is not None and task != '':
-                task_list[id] = task
-                return redirect(url_for('tasks.index'))
+    task = operations.getById(id)
+    form = forms.Task()
 
-    return render_template("tasks/update.html")
+    if request.method == 'GET':
+        form.name.data = task.model
+
+    if form.validate_on_submit():
+        operations.update(id, form.name.data)
+        return redirect(url_for('tasks.index'))
+
+    return render_template("tasks/update.html", form=form)

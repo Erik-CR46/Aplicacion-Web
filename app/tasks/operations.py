@@ -2,10 +2,11 @@ from sqlalchemy.orm import session
 from app.tasks import models
 from app import db
 
-def getById(id:int):
-    #task = db.session.query(models.Task).filter(models.Task.id == id).first()
-    task = db.session.query(models.Task).get(id)
-    #task = models.Task.query.get_or_404(id)
+def getById(id:int, show404=False):
+    if show404:
+        task = models.Task.query.get_or_404(id)
+    else:    
+        task = db.session.query(models.Task).get(id)
     return task
 
 def getAll():
@@ -30,7 +31,7 @@ def update(id:int, name:str):
     return taskdb
 
 def delete(id:int):
-    taskdb = getById(id=id)
+    taskdb = getById(id=id, show404=True)
     db.session.delete(taskdb)
     db.session.commit()
 
