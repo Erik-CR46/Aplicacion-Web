@@ -21,5 +21,12 @@
     </u>
 {% endif %}
 
+{% if id: %}
+
+    {{form.file.label}}
+    {{form.file}}
+
+{% endif %}
+
 {{form.csrf_token}}
 <button type="submit"> Send </button>

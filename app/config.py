@@ -2,11 +2,17 @@ import os
 
 # Ruta base del proyecto (donde está run.py)
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+
+def allowed_extensions_name(filename): #Test extensiones
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
 
 class Config(object):
     """Configuración base compartida por todos los entornos."""
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = os.environ.get('SECRET_KEY', 'dev-secret-key')
+    UPLOAD_FOLDER = os.path.realpath('.') + '/app/uploads'
 
 
 class ProductionConfig(Config):

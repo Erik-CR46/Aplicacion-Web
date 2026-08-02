@@ -1,6 +1,9 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 from app.tasks import operations
 from app.tasks import forms
+from werkzeug.utils import secure_filename
+from app import app, config
+import os
 
 taskRoute = Blueprint('tasks', __name__, url_prefix='/tasks')
 
@@ -39,6 +42,13 @@ def update(id:int):
 
     if form.validate_on_submit():
         operations.update(id, form.name.data)
+
+        if form.file.data and config.allowed_extensions_name(form.file.data.filename):
+            taskdb_file = form.file.data
+            filename = secure_filename(taskdb_file.filename)
+            taskdb_file.save(os.path.join(app.instance_path, app.config['UPLOAD_FOLDER'], filename))
+
+
         return redirect(url_for('tasks.index'))
 
-    return render_template("tasks/update.html", form=form)
+    return render_template("tasks/update.html", form=form, id=id)

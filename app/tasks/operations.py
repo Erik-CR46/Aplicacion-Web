@@ -1,6 +1,7 @@
 from sqlalchemy.orm import session
 from app.tasks import models
-from app import db
+from app import db, config
+
 
 def getById(id:int, show404=False):
     if show404:
@@ -26,6 +27,7 @@ def update(id:int, name:str):
     taskdb.model = name
 
     db.session.add(taskdb)
+
     db.session.commit()
     db.session.refresh(taskdb)
     return taskdb
