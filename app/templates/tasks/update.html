@@ -7,5 +7,12 @@
         {{ form.hidden_tag() }}
         {% include 'tasks/_form.html'%}
     </form>
+
+    {% if document %}
+        <p>Current file: {{ document.filename }}</p>
+    {% else %}
+        <p>No file uploaded yet.</p>
+    {% endif %}
+
 {% endblock %}
 

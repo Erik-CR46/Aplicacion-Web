@@ -29,13 +29,18 @@ def create():
 
 @taskRoute.route('/delete/<int:id>')
 def delete(id:int):
+    operations.deleteDocument(id)
     operations.delete(id)
     return redirect(url_for('tasks.index'))
 
 @taskRoute.route('/update/<int:id>', methods=['GET', 'POST'])
 def update(id:int):
-    task = operations.getById(id)
+    task = operations.getById(id, show404=True)
     form = forms.Task()
+    document = None
+
+    if task.document_id is not None:
+        document = operations.getByIdDocument(task.document_id)
 
     if request.method == 'GET':
         form.name.data = task.model
@@ -46,9 +51,9 @@ def update(id:int):
         if form.file.data and config.allowed_extensions_name(form.file.data.filename):
             taskdb_file = form.file.data
             filename = secure_filename(taskdb_file.filename)
-            taskdb_file.save(os.path.join(app.instance_path, app.config['UPLOAD_FOLDER'], filename))
-
+            document = operations.createDocument(filename=filename, extension=filename.split('.')[-1], file=taskdb_file)
+            operations.update(id, form.name.data, document.id)
 
         return redirect(url_for('tasks.index'))
 
-    return render_template("tasks/update.html", form=form, id=id)
+    return render_template("tasks/update.html", form=form, id=id, document=document, task=task)
