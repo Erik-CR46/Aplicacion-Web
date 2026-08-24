@@ -15,17 +15,18 @@ def getAll():
     tasks = db.session.query(models.Task).all()
     return tasks
 
-def create(name:str):
-    taskdb = models.Task(model=name)
+def create(name:str, brand_id:int=None):
+    taskdb = models.Task(model=name, brand_id=brand_id)
     db.session.add(taskdb)
     db.session.commit()
     db.session.refresh(taskdb)
     return taskdb
 
-def update(id:int, name:str, document_id:int=None):
+def update(id:int, name:str, brand_id:int=None, document_id:int=None):
     taskdb = getById(id=id, show404=True)
 
     taskdb.model = name
+    taskdb.brand_id = brand_id
 
     if document_id is not None:
         taskdb.document_id = document_id

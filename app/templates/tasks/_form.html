@@ -11,6 +11,23 @@
     </u>
 {% endif %}
 
+
+{{form.brand.label}}
+{{form.brand}}
+
+
+{% if form.brand.errors %}
+    <u>
+        {% for i in form.brand.error %}
+            <li>
+                {{ i }}
+            </li>
+        {% endfor %}
+    </u>
+{% endif %}
+
+
+
 {% if form.errors %}
     <u>
         {% for i in form.error %}
