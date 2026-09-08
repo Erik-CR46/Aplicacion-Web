@@ -39,6 +39,12 @@ def update(id:int):
     form = forms.Task()
     form.brand.choices = [(brand.id, brand.name) for brand in models.Brand.query.all()]
 
+    #tags
+    form_tag = forms.TaskTagAdd()
+    form_tag.tag.choices = [(tag.id, tag.name) for tag in models.Tag.query.all()]
+
+    formTagRemove = forms.TaskTagRemove()
+
     document = None
 
     if task.document_id is not None:
@@ -59,4 +65,25 @@ def update(id:int):
 
         return redirect(url_for('tasks.index'))
 
-    return render_template("tasks/update.html", form=form, id=id, document=document, task=task)
+    return render_template("tasks/update.html", form=form, formTag=form_tag, formTagRemove=formTagRemove, id=id, document=document, task=task)
+
+#tag
+
+@taskRoute.route('/<int:id>/tag/add', methods=['POST'])
+def add_tag(id:int):
+    formTag = forms.TaskTagAdd()
+    formTag.tag.choices = [(tag.id, tag.name) for tag in models.Tag.query.all()]
+
+    if formTag.validate_on_submit():
+        operations.addTag(id, formTag.tag.data)
+
+    return redirect(url_for('tasks.update', id=id))
+
+@taskRoute.route('/<int:id>/tag/remove', methods=['POST'])
+def remove_tag(id:int):
+    formTagRemove = forms.TaskTagRemove()
+
+    if formTagRemove.validate_on_submit():
+        operations.removeTag(id, formTagRemove.tag.data)
+
+    return redirect(url_for('tasks.update', id=id))

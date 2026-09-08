@@ -86,3 +86,28 @@ def deleteDocument(id:int):
         db.session.add(taskdb)
 
     db.session.commit()
+
+#tags
+
+def addTag(id:int, tag_id:int):
+    task = getById(id=id)
+    tag = models.Tag.query.get_or_404(tag_id)
+    task.tags.append(tag)
+
+
+    db.session.add(task)
+    db.session.commit()
+    db.session.refresh(task)
+
+    return task
+
+def removeTag(id:int, tag_id:int):
+    task = getById(id=id)
+    tag = models.Tag.query.get_or_404(tag_id)
+    task.tags.remove(tag)
+
+    db.session.add(task)
+    db.session.commit()
+    db.session.refresh(task)
+
+    return task

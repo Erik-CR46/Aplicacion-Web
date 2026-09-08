@@ -1,7 +1,14 @@
 from app import db
+from sqlalchemy import table
 from sqlalchemy.orm import relationship
 
 
+#Tables
+
+task_tags = db.Table('task_tags',db.Column('task_id', db.Integer, db.ForeignKey('coches.id'), primary_key=True),
+                     db.Column('tag_id', db.Integer, db.ForeignKey('tags.id'), primary_key=True))
+
+#Models
 class Task(db.Model):
     __tablename__ = 'coches'
     id=db.Column(db.Integer, primary_key=True)
@@ -12,6 +19,8 @@ class Task(db.Model):
 
     brand_id=db.Column(db.Integer, db.ForeignKey('brands.id'))
     brand = relationship("Brand", lazy="joined")
+
+    tags = relationship("Tag", secondary=task_tags)
 
 class Document(db.Model):
     __tablename__ = 'files'
@@ -24,3 +33,10 @@ class Brand(db.Model):
     __tablename__ = 'brands'
     id=db.Column(db.Integer, primary_key=True)
     name=db.Column(db.String(255))
+
+class Tag(db.Model):
+    __tablename__ = 'tags'
+    id=db.Column(db.Integer, primary_key=True)
+    name=db.Column(db.String(255))
+
+    #tasks = relationship("Task", secondary=task_tags)
