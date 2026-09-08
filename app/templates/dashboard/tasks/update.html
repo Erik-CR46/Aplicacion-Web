@@ -1,0 +1,22 @@
+{% extends "dashboard/base.html" %}
+
+{% block title %} Update {% endblock %}
+
+{% block content %} 
+    <form action="" method="post", enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        {% include 'dashboard/tasks/_form.html'%}
+    </form>
+
+    {% if document %}
+        <p>Current file: {{ document.filename }}</p>
+    {% else %}
+        <p>No file uploaded yet.</p>
+    {% endif %}
+
+    <h3>Tags</h3>
+    {% include 'dashboard/tasks/tag/index.html' %}
+    {% include 'dashboard/tasks/tag/assing.html' %}
+
+{% endblock %}
+

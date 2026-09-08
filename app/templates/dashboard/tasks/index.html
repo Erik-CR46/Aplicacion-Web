@@ -1,0 +1,25 @@
+{% extends "dashboard/base.html" %}
+
+{% block title %} Index task {% endblock %}
+
+{% block content %} 
+        <div>
+            <a href="{{ url_for('auth.logout') }}">
+                <button type="button">Cerrar sesión</button>
+            </a>
+        </div>
+        
+        <br>
+
+        <a href="{{ url_for('tasks.create')}}">Create</a>
+
+        <ul>
+            {% for i in task_list%}
+                <li>{{i.model}}</li>
+                <a href="{{ url_for('tasks.update', id=i.id) }}">Edit</a>
+                <a href="{{ url_for('tasks.delete', id=i.id)}}">Delete</a>
+            {% endfor %}
+        </ul>
+   
+{% endblock %}
+

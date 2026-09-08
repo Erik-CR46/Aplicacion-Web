@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %} Register User {% endblock %}
+
+{% block content %} 
+    <form action="" method="post">
+        {{ form.csrf_token }}
+        
+        {{form.username.label}}
+        {{form.username}}
+
+        {{form.password.label}}
+        {{form.password}}
+
+        {{form.confirm_password.label}}
+        {{form.confirm_password}}
+
+        <button type="submit">Send</button>
+        
+    </form>
+{% endblock %}
+
