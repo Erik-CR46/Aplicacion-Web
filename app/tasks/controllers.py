@@ -1,9 +1,9 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask_login import login_required
-from app.tasks import operations, forms, models
+from app.tasks import operations, forms, models as task_models
 from werkzeug.utils import secure_filename
 from app import app, config
-from app.auth import models
+from app.auth import models as auth_models
 import os
 
 
@@ -31,7 +31,7 @@ def index():
 @taskRoute.route('/create', methods=('GET', 'POST'))
 def create():
     form = forms.Task()
-    form.brand.choices = [(brand.id, brand.name) for brand in models.Brand.query.all()]
+    form.brand.choices = [(brand.id, brand.name) for brand in task_models.Brand.query.all()]
     if form.validate_on_submit():
         operations.create(form.name.data, form.brand.data)
         return redirect(url_for('tasks.index'))
@@ -47,11 +47,11 @@ def delete(id:int):
 def update(id:int):
     task = operations.getById(id, show404=True)
     form = forms.Task()
-    form.brand.choices = [(brand.id, brand.name) for brand in models.Brand.query.all()]
+    form.brand.choices = [(brand.id, brand.name) for brand in task_models.Brand.query.all()]
 
     #tags
     form_tag = forms.TaskTagAdd()
-    form_tag.tag.choices = [(tag.id, tag.name) for tag in models.Tag.query.all()]
+    form_tag.tag.choices = [(tag.id, tag.name) for tag in task_models.Tag.query.all()]
 
     formTagRemove = forms.TaskTagRemove()
 
@@ -85,7 +85,7 @@ def update(id:int):
 @taskRoute.route('/<int:id>/tag/add', methods=['POST'])
 def add_tag(id:int):
     formTag = forms.TaskTagAdd()
-    formTag.tag.choices = [(tag.id, tag.name) for tag in models.Tag.query.all()]
+    formTag.tag.choices = [(tag.id, tag.name) for tag in task_models.Tag.query.all()]
 
     if formTag.validate_on_submit():
         operations.addTag(id, formTag.tag.data)
