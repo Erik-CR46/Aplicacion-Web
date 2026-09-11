@@ -9,7 +9,9 @@ app = Flask(__name__)
 app.config.from_object(DevelopmentConfig)
 
 db = SQLAlchemy(app)
-from app.api.task import TaskApi
+from app.api.task import TaskApi, TaskPagination
+from app.api.brands_arg import BrandArgApi
+from app.api.tags_args import TagArgApi
 
 migrate = Migrate(app, db) #Con esto ya no haria falta crear la tabla con create all
 # Esta línea inicializa Flask-Migrate, vinculando la aplicación `app` 
@@ -23,6 +25,11 @@ login_manager.init_app(app)
 #RestApi
 api = Api(app)
 api.add_resource(TaskApi, '/api/task', '/api/task/<int:id>')
+api.add_resource(TaskPagination, '/api/task', '/api/task/<int:page>/<int:per_page>')
+api.add_resource(BrandArgApi, '/api/brand', '/api/brand/<int:id>')
+api.add_resource(TagArgApi, '/api/tag', '/api/tag/<int:id>')
+
+
 
 from app.auth.controllers import authRoute
 from app.tasks.controllers import taskRoute

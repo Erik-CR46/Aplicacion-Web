@@ -22,6 +22,15 @@ class Task(db.Model):
 
     tags = relationship("Tag", secondary=task_tags)
 
+    @property
+    def serialize(self):
+        return {
+            'id':self.id,
+            'model':self.model,
+            'brand':self.brand.name,
+            'tags': [tag.name for tag in self.tags],
+        }
+
 class Document(db.Model):
     __tablename__ = 'files'
     id=db.Column(db.Integer, primary_key=True)
@@ -33,6 +42,13 @@ class Brand(db.Model):
     __tablename__ = 'brands'
     id=db.Column(db.Integer, primary_key=True)
     name=db.Column(db.String(255))
+
+    @property
+    def serialize(self):
+        return {
+            'id':self.id,
+            'name':self.name,
+        }
 
 class Tag(db.Model):
     __tablename__ = 'tags'
