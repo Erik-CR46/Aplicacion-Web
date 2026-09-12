@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_restful import Api
+from flask_jwt_extended import JWTManager
 
 app = Flask(__name__)
 app.config.from_object(DevelopmentConfig)
@@ -22,10 +23,14 @@ migrate = Migrate(app, db) #Con esto ya no haria falta crear la tabla con create
 login_manager = LoginManager()
 login_manager.init_app(app)
 
+#jwt
+jwt = JWTManager()
+jwt.init_app(app)
+
 #RestApi
 api = Api(app)
 api.add_resource(TaskApi, '/api/task', '/api/task/<int:id>')
-api.add_resource(TaskPagination, '/api/task', '/api/task/<int:page>/<int:per_page>')
+api.add_resource(TaskPagination, '/api/task/<int:page>/<int:per_page>')
 api.add_resource(BrandArgApi, '/api/brand', '/api/brand/<int:id>')
 api.add_resource(TagArgApi, '/api/tag', '/api/tag/<int:id>')
 

@@ -1,4 +1,5 @@
 import os
+from datetime import timedelta
 
 # Ruta base del proyecto (donde está run.py)
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
@@ -13,6 +14,7 @@ class Config(object):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = os.environ.get('SECRET_KEY', 'dev-secret-key')
     UPLOAD_FOLDER = os.path.realpath('.') + '/app/uploads'
+    JWT_ACCESS_TOKEN_EXPIRES = timedelta(hours=24) 
 
 
 class ProductionConfig(Config):

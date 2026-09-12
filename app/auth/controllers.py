@@ -1,8 +1,10 @@
 from flask_login import current_user, login_user, logout_user, login_required
-from flask import flash, g, Blueprint, redirect, render_template, url_for
+from flask_jwt_extended import create_access_token
+from flask import flash, g, Blueprint, redirect, render_template, url_for, request, jsonify
 from app import login_manager, db
 from app.auth.models import User
 from app.auth.forms import LoginForm, RegisterForm
+from app.auth.helpers import authenticate
 
 authRoute = Blueprint('auth', __name__)
 
@@ -73,4 +75,27 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('auth.login'))
+
+
+#JWT
+@authRoute.route('/user/api', methods=['POST'])
+def api():
+    if not request.is_json:
+        return jsonify({'msj': 'Missing JSN in request'}), 400
     
+    username = request.json.get('username', None)
+    password = request.json.get('password', None)
+
+    if not username:
+        return jsonify({'msj': 'Username not exist'}), 400
+
+    if not password:
+        return jsonify({'msj': 'Password not exist'}), 400
+
+    user = authenticate(username, password)
+
+    if not user:
+        return jsonify({'msj': 'Username or password not correct'}), 400
+
+    access_token = create_access_token(identity=str(user.id))
+    return jsonify(access_token=access_token), 200
