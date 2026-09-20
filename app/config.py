@@ -53,3 +53,7 @@ class DevelopmentConfig(Config):
     SECRET_KEY='P@ssw0rd'
     #WTF_CSRF_ENABLED = False
 
+class TestingConfig(DevelopmentConfig):
+    # En los tests no enviamos tokens CSRF junto con los formularios.
+    # Esta opción evita que Flask-WTF rechace esas peticiones de prueba.
+    WTF_CSRF_ENABLED = False

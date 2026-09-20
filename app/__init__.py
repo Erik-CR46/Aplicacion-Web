@@ -44,3 +44,7 @@ app.register_blueprint(authRoute)
 #with app.app_context():
 #    db.create_all()
 
+@app.route('/')
+def hello_world():
+    return {'hello':'world'}
+

@@ -16,7 +16,7 @@ def before():
 
 
 @taskRoute.route('/')
-#@login_required
+@login_required
 def index():
 
     #operations.create("Task")

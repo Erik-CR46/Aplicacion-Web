@@ -4,11 +4,11 @@ from app.tasks import models
 from app import app, db, config
 
 
-def getById(id:int, show404=False):
+def getById(id: int, show404=False):
     if show404:
-        task = models.Task.query.get_or_404(id)
-    else:    
-        task = db.session.query(models.Task).get(id)
+        task = db.get_or_404(models.Task, id)
+    else:
+        task = db.session.get(models.Task, id)
     return task
 
 def getAll():
@@ -16,6 +16,7 @@ def getAll():
     return tasks
 
 def create(name:str, brand_id:int=None):
+    # "name" viene del formulario, pero la columna de la base de datos se llama "model".
     taskdb = models.Task(model=name, brand_id=brand_id)
     db.session.add(taskdb)
     db.session.commit()
@@ -59,11 +60,11 @@ def createDocument(filename:str, extension:str, file=None):
 
 
 
-def getByIdDocument(id:int, show404=False):
+def getByIdDocument(id: int, show404=False):
     if show404:
-        task = models.Document.query.get_or_404(id)
-    else:    
-        task = db.session.query(models.Document).get(id)
+        task = db.get_or_404(models.Document, id)
+    else:
+        task = db.session.get(models.Document, id)
     return task
 
 def deleteDocument(id:int):
@@ -111,3 +112,8 @@ def removeTag(id:int, tag_id:int):
     db.session.refresh(task)
 
     return task
+
+
+def last_task():
+    task = models.Task.query.order_by(models.Task.id.desc()).first()
+    return task.id
