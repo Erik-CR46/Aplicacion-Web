@@ -26,7 +26,7 @@ def index():
     #print(operations.delete(4))
     #print(operations.pagination().items)
 
-    return render_template("dashboard/tasks/index.html", task_list= operations.getAll())
+    return render_template("dashboard/tasks/index.html", task_list= operations.pagination(request.args.get('page', 1, type=int)))
 
 @taskRoute.route('/create', methods=('GET', 'POST'))
 def create():

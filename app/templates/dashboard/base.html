@@ -4,8 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% block title %} <title></title> {% endblock %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css')}}">
 </head>
 <body>
+
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand "href="{{ url_for('tasks.index') }}">Dashboard</a>
+            <button class="navbar-toggler" type="button" data-bs-target="#navbarApp" data-bs-toggle="collapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse" id="navbarApp">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('tasks.create') }}">Task</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
     <div>
         {% with messages = get_flashed_messages(category_filter='success') %}
@@ -20,8 +37,14 @@
     </div>
 
 
-    <div>
-        {% block content %} {% endblock %}
-    </div> 
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                {% block content %} {% endblock %}
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 </body>
 </html>

@@ -6,7 +6,7 @@ from flask_login import LoginManager
 from flask_restful import Api
 from flask_jwt_extended import JWTManager
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='assets')
 app.config.from_object(DevelopmentConfig)
 
 db = SQLAlchemy(app)
