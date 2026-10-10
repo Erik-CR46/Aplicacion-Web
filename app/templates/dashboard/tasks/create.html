@@ -1,10 +1,20 @@
 {% extends "dashboard/base.html" %}
 
-{% block title %} Create {% endblock %}
+{% block title %}Añadir coche | AutoGestión{% endblock %}
 
-{% block content %} 
-    <form action="" method="post">
-        {% include 'dashboard/tasks/_form.html'%}
-    </form>
+{% block content %}
+<div class="container dashboard-form-page">
+    <div class="dashboard-form-heading">
+        <p class="fleet-eyebrow">COLECCIÓN</p>
+        <h1>Añadir coche</h1>
+        <p class="fleet-muted mb-0">Completa los datos para añadir un vehículo.</p>
+    </div>
+    <section class="card dashboard-form-card">
+        <div class="card-body">
+            <form class="dashboard-form" action="" method="post" novalidate>
+                {% include 'dashboard/tasks/_form.html' %}
+            </form>
+        </div>
+    </section>
+</div>
 {% endblock %}
-

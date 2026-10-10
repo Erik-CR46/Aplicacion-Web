@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask import Blueprint, render_template, request, redirect, url_for, flash, abort, send_from_directory
 from flask_login import login_required
 from app.tasks import operations, forms, models as task_models
 from werkzeug.utils import secure_filename
@@ -25,8 +25,18 @@ def index():
     #print(operations.getAll())
     #print(operations.delete(4))
     #print(operations.pagination().items)
-
     return render_template("dashboard/tasks/index.html", task_list= operations.pagination(request.args.get('page', 1, type=int)))
+
+@taskRoute.route('/document/<int:id>')
+@login_required
+def document(id:int):
+    document = operations.getByIdDocument(id, show404=False)
+    if document is None:
+        abort(404)
+
+    upload_dir = os.path.join(app.instance_path, app.config['UPLOAD_FOLDER'])
+    return send_from_directory(upload_dir, document.filename)
+
 
 @taskRoute.route('/create', methods=('GET', 'POST'))
 def create():
@@ -34,6 +44,7 @@ def create():
     form.brand.choices = [(brand.id, brand.name) for brand in task_models.Brand.query.all()]
     if form.validate_on_submit():
         operations.create(form.name.data, form.brand.data)
+        flash("The registry has been created successfully", "success")
         return redirect(url_for('tasks.index'))
     return render_template("dashboard/tasks/create.html", form=form)
 
@@ -41,6 +52,7 @@ def create():
 def delete(id:int):
     operations.deleteDocument(id)
     operations.delete(id)
+    flash('Task removed successfully!', 'success')
     return redirect(url_for('tasks.index'))
 
 @taskRoute.route('/update/<int:id>', methods=['GET', 'POST'])

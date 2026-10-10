@@ -1,0 +1,415 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #00131c;
+
+    font-family: Arial, sans-serif;
+}
+
+
+/* CONTENEDOR */
+
+.container {
+    position: relative;
+
+    width: min(750px, calc(100vw - 32px));
+    height: 450px;
+
+    overflow: hidden;
+
+    background: #001c29;
+
+    border: 2px solid #00efff;
+
+    box-shadow: 0 0 25px #00efff;
+}
+
+
+/* FORMULARIOS */
+
+.form-container {
+    position: absolute;
+
+    top: 0;
+
+    width: 50%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+}
+
+
+.login-container {
+    left: 0;
+    transform: translateX(0);
+}
+
+
+.register-container {
+    right: 0;
+    transform: translateX(100%);
+}
+
+
+/* FORM */
+
+.form {
+    width: 75%;
+    flex: 0 0 auto;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.auth-form {
+    width: 100%;
+}
+
+
+.form h2 {
+    color: white;
+
+    margin-bottom: 25px;
+
+    font-size: 24px;
+}
+
+
+/* INPUT */
+
+.input-box {
+    position: relative;
+
+    width: 100%;
+
+    margin-bottom: 18px;
+}
+
+
+.input-box input {
+    width: 100%;
+
+    padding: 8px 25px 8px 5px;
+
+    background: transparent;
+
+    border: none;
+    border-bottom: 1px solid white;
+
+    outline: none;
+
+    color: white;
+
+    font-size: 12px;
+}
+
+
+.input-box input::placeholder {
+    color: #ccc;
+}
+
+
+.input-box span {
+    position: absolute;
+
+    right: 5px;
+    top: 5px;
+
+    color: white;
+
+    font-size: 12px;
+}
+
+.field-error {
+    display: block;
+    margin-top: 5px;
+    color: #ffb3b3;
+    font-size: 11px;
+}
+
+.auth-messages {
+    position: absolute;
+    top: 10px;
+    left: 12px;
+    right: 12px;
+    z-index: 4;
+    display: grid;
+    justify-items: center;
+    gap: 4px;
+    pointer-events: none;
+}
+
+.auth-message {
+    margin: 0;
+    padding: 7px 12px;
+    border-radius: 6px;
+    background: #00131c;
+    color: white;
+    font-size: 12px;
+    text-align: center;
+}
+
+.auth-message.danger {
+    color: #ffb3b3;
+}
+
+.auth-message.success {
+    color: #a7f3d0;
+}
+
+
+/* BOTÓN */
+
+button {
+    width: 100%;
+
+    padding: 8px;
+
+    margin-top: 5px;
+
+    border: none;
+
+    border-radius: 20px;
+
+    background: linear-gradient(
+        90deg,
+        #008fa0,
+        #00efff
+    );
+
+    color: white;
+
+    cursor: pointer;
+
+    box-shadow: 0 0 10px #00efff;
+}
+
+
+button:hover {
+    box-shadow: 0 0 20px #00efff;
+}
+
+
+/* TEXTO */
+
+.form p {
+    margin-top: 15px;
+
+    color: #ccc;
+
+    font-size: 9px;
+}
+
+
+.form a {
+    color: #00efff;
+
+    font-size: 10px;
+
+    text-decoration: none;
+
+    margin-top: 4px;
+}
+
+
+/* BIENVENIDA */
+
+.welcome {
+    position: absolute;
+
+    width: 50%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+
+    color: white;
+
+    z-index: 2;
+}
+
+
+.welcome h1 {
+    font-size: 25px;
+
+    margin-bottom: 15px;
+}
+
+.welcome h1,
+.welcome p {
+    max-width: 260px;
+}
+
+.welcome p {
+    font-size: 10px;
+
+    line-height: 1.5;
+}
+
+
+/* WELCOME LOGIN */
+
+.welcome-login {
+
+    right: 0;
+
+    padding: 0 24px 0 85px;
+
+    background: linear-gradient(
+        135deg,
+        #001c29,
+        #00b8c7
+    );
+
+    clip-path: polygon(
+        35% 0,
+        100% 0,
+        100% 100%,
+        0 100%
+    );
+}
+
+
+/* WELCOME REGISTER */
+
+.welcome-register {
+
+    left: 0;
+
+    padding: 0 80px 0 35px;
+
+    background: linear-gradient(
+        135deg,
+        #00b8c7,
+        #001c29
+    );
+
+    clip-path: polygon(
+        0 0,
+        65% 0,
+        100% 100%,
+        0 100%
+    );
+}
+
+
+/* ESTADO INICIAL */
+
+/* BIENVENIDA */
+
+.welcome {
+    position: absolute;
+
+    top: 0;
+
+    width: 50%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    color: white;
+
+    z-index: 2;
+
+    transition: transform 0.8s ease-in-out;
+}
+
+
+/* PANEL LOGIN */
+
+.welcome-login {
+
+    right: 0;
+
+    padding: 0 24px 0 85px;
+
+    background: linear-gradient(
+        135deg,
+        #001c29,
+        #00b8c7
+    );
+
+    clip-path: polygon(
+        35% 0,
+        100% 0,
+        100% 100%,
+        0 100%
+    );
+
+    transform: translateX(0);
+}
+
+
+/* PANEL REGISTER */
+
+.welcome-register {
+
+    left: 0;
+
+    padding: 0 80px 0 35px;
+
+    background: linear-gradient(
+        135deg,
+        #00b8c7,
+        #001c29
+    );
+
+    clip-path: polygon(
+        0 0,
+        65% 0,
+        100% 100%,
+        0 100%
+    );
+
+    transform: translateX(-100%);
+}
+
+/* CUANDO ESTAMOS EN REGISTER */
+
+.container.active .welcome-login {
+    transform: translateX(100%);
+}
+
+.container.active .welcome-register {
+    transform: translateX(0);
+}
+
+
+/* FORMULARIOS */
+
+.login-container,
+.register-container {
+    transition: transform 0.8s ease-in-out;
+}
+
+
+/* LOGIN → DERECHA */
+
+.container.active .login-container {
+    transform: translateX(-100%);
+}
+
+
+/* REGISTER → IZQUIERDA */
+
+.container.active .register-container {
+    transform: translateX(0);
+}

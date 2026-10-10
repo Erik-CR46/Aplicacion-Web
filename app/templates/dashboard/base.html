@@ -1,49 +1,87 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% block title %} <title></title> {% endblock %}
+    <title>{% block title %}AutoGestión{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
 </head>
-<body>
+<body class="fleet-page">
 
-    <nav class="navbar navbar-expand-lg">
+    <!-- Bootstrap: 'navbar' crea la barra de navegación; 'navbar-expand-lg' la expande a partir de pantallas grandes; 'fleet-navbar' es tu clase personalizada para estilos propios -->
+    <nav class="navbar navbar-expand-lg fleet-navbar">
+        <!-- Bootstrap: 'container-fluid' ocupa todo el ancho disponible -->
         <div class="container-fluid">
-            <a class="navbar-brand "href="{{ url_for('tasks.index') }}">Dashboard</a>
-            <button class="navbar-toggler" type="button" data-bs-target="#navbarApp" data-bs-toggle="collapse">
+            <!-- Bootstrap: 'navbar-brand' define el logo/nombre de la marca; 'fleet-brand' es tu estilo adicional -->
+            <a class="navbar-brand fleet-brand" href="{{ url_for('tasks.index') }}">
+                <span class="fleet-brand-icon" aria-hidden="true">⌁</span>
+                <span>AutoGestión</span>
+            </a>
+            <!-- Bootstrap: 'navbar-toggler' crea el botón hamburguesa para móviles; 'data-bs-toggle="collapse"' activa el menú colapsable -->
+            <button class="navbar-toggler" type="button" data-bs-target="#navbarApp" data-bs-toggle="collapse" aria-label="Abrir navegación">
+                <!-- Bootstrap: 'navbar-toggler-icon' dibuja el icono del botón de menú -->
                 <span class="navbar-toggler-icon"></span>
             </button>
+
+            <!-- Bootstrap: 'navbar-collapse' define el bloque que se puede ocultar/mostrar; 'collapse' activa la funcionalidad colapsable -->
             <div class="navbar-collapse collapse" id="navbarApp">
-                <ul class="navbar-nav">
+                <!-- Bootstrap: 'navbar-nav' convierte la lista en navegación horizontal; 'fleet-nav-links' es tu estilo propio -->
+                <ul class="navbar-nav fleet-nav-links">
+                    <!-- Bootstrap: 'nav-item' define cada elemento dentro de la navegación -->
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('tasks.create') }}">Task</a>
+                        <!-- Bootstrap: 'nav-link' aplica estilo de enlace de navegación -->
+                        <a class="nav-link" href="{{ url_for('tasks.index') }}">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('tasks.create') }}">Añadir coche</a>
                     </li>
                 </ul>
+
+                <!-- Bootstrap: 'navbar-nav' crea una lista de navegación; 'ms-auto' empuja este bloque hacia la derecha -->
+                <ul class="navbar-nav ms-auto">
+                    <!-- Bootstrap: 'nav-item' define cada elemento; 'dropdown' activa el menú desplegable; 'dropstart' hace que el menú se abra hacia la izquierda -->
+                    <li class="nav-item dropdown dropstart">
+                        <!-- Bootstrap: 'dropdown-toggle' marca este enlace como activador del menú; 'nav-link' lo estiliza como enlace de navegación -->
+                        <a href="#" class="nav-link dropdown-toggle fleet-profile" data-bs-toggle="dropdown">
+                            <img src="{{ url_for('static', filename='img/profile.png') }}" width="34" height="34" alt="">
+                            <span>{{ current_user.username }}</span>
+                        </a>
+                        <!-- Bootstrap: 'dropdown-menu' crea el menú desplegable -->
+                        <ul class="dropdown-menu">
+                            <li>
+                                <!-- Bootstrap: 'dropdown-item' define cada opción del menú desplegable -->
+                                <a class="dropdown-item" href="#">Profile</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ url_for('auth.logout') }}">Cerrar sesión</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
             </div>
         </div>
     </nav>
 
-    <div>
+    <main class="dashboard-shell">
         {% with messages = get_flashed_messages(category_filter='success') %}
             {% if messages %}
-                <ul>
+                <div class="dashboard-alerts">
                     {% for message in messages %}
-                        <li>{{ message }}</li>
+                        <!-- Bootstrap: 'alert' crea un mensaje de alerta; 'alert-success' le da color verde de éxito; 'alert-dismissible' permite cerrar la alerta; 'fade show' añade la animación de aparición -->
+                        <div class="alert alert-success alert-dismissible fade show" role="status">
+                            {{ message }}
+                            <!-- Bootstrap: 'btn-close' crea el botón de cerrar la alerta; 'data-bs-dismiss="alert"' permite ocultarla -->
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+                        </div>
                     {% endfor %}
-                </ul>
+                </div>
             {% endif %}
         {% endwith %}
-    </div>
 
-
-    <div class="container">
-        <div class="card">
-            <div class="card-body">
-                {% block content %} {% endblock %}
-            </div>
-        </div>
-    </div>
+        {% block content %}{% endblock %}
+    </main>
 
     <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 </body>

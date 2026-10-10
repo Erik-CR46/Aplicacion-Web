@@ -22,6 +22,7 @@ migrate = Migrate(app, db) #Con esto ya no haria falta crear la tabla con create
 #LOGIN
 login_manager = LoginManager()
 login_manager.init_app(app)
+login_manager.login_view = 'auth.login'
 
 #jwt
 jwt = JWTManager()
@@ -47,4 +48,3 @@ app.register_blueprint(authRoute)
 @app.route('/')
 def hello_world():
     return {'hello':'world'}
-

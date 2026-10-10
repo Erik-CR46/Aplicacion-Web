@@ -1,22 +1,39 @@
 {% extends "dashboard/base.html" %}
 
-{% block title %} Update {% endblock %}
+{% block title %}Editar coche | AutoGestión{% endblock %}
 
-{% block content %} 
-    <form action="" method="post", enctype="multipart/form-data">
-        {{ form.hidden_tag() }}
-        {% include 'dashboard/tasks/_form.html'%}
-    </form>
+{% block content %}
+<div class="container dashboard-form-page">
+    <div class="dashboard-form-heading">
+        <p class="fleet-eyebrow">COLECCIÓN · #{{ id }}</p>
+        <h1>Editar coche</h1>
+        <p class="fleet-muted mb-0">Actualiza los datos y gestiona los archivos o etiquetas del vehículo.</p>
+    </div>
 
-    {% if document %}
-        <p>Current file: {{ document.filename }}</p>
-    {% else %}
-        <p>No file uploaded yet.</p>
-    {% endif %}
+    <section class="card dashboard-form-card">
+        <div class="card-body">
+            <form class="dashboard-form" action="" method="post" enctype="multipart/form-data">
+                {{ form.hidden_tag() }}
+                {% include 'dashboard/tasks/_form.html' %}
+            </form>
 
-    <h3>Tags</h3>
-    {% include 'dashboard/tasks/tag/index.html' %}
-    {% include 'dashboard/tasks/tag/assing.html' %}
+            <p class="small fleet-muted mt-3 mb-0">
+                {% if document %}
+                Archivo actual: <span class="text-body">{{ document.filename }}</span>
+                {% else %}
+                Todavía no hay ningún archivo subido.
+                {% endif %}
+            </p>
+        </div>
+    </section>
+
+    <section class="card dashboard-detail-card mt-4">
+        <div class="card-body">
+            <h2 class="dashboard-section-title mt-0">Etiquetas</h2>
+            {% include 'dashboard/tasks/tag/index.html' %}
+            {% include 'dashboard/tasks/tag/assing.html' %}
+        </div>
+    </section>
+</div>
 
 {% endblock %}
-

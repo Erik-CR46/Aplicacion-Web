@@ -1,32 +1,38 @@
-{{form.name.label}}
-{{form.name}}
+<div class="row">
+    <div class="col">
+        {% set error = '' %}
+        {% if form.name.errors %}
+            {% set error = 'is-invalid'%}
+            <u>
+                {% for i in form.name.errors %}
+                    <p class="text-danger"> {{ i }} </p>
+                {% endfor %}
+            </u>
+        {% endif %}
 
-{% if form.name.errors %}
-    <u>
-        {% for i in form.name.error %}
-            <li>
-                {{ i }}
-            </li>
-        {% endfor %}
-    </u>
-{% endif %}
+        <div class="mb-3">
+            {{form.name.label(class="form-label")}}
+            {{form.name(class="form-control " + error)}}
+        </div>
+    </div>
 
+    <div class="col">
+        <div class="mb-3">
+            {{form.brand.label(class="form-label")}}
+            {{form.brand(class="form-select")}}
+        </div>
 
-{{form.brand.label}}
-{{form.brand}}
-
-
-{% if form.brand.errors %}
-    <u>
-        {% for i in form.brand.error %}
-            <li>
-                {{ i }}
-            </li>
-        {% endfor %}
-    </u>
-{% endif %}
-
-
+        {% if form.brand.errors %}
+            <u>
+                {% for i in form.brand.errors %}
+                    <li>
+                        {{ i }}
+                    </li>
+                {% endfor %}
+            </u>
+        {% endif %}
+    </div>
+</div>
 
 {% if form.errors %}
     <u>
@@ -39,11 +45,12 @@
 {% endif %}
 
 {% if id: %}
-
-    {{form.file.label}}
-    {{form.file}}
+    <div class="mb-3">
+        {{form.file.label(class="form-label")}}
+        {{form.file(class="form-control")}}
+    </div>
 
 {% endif %}
 
 {{form.csrf_token}}
-<button type="submit"> Send </button>
+<button class="btn btn-primary mt-2" type="submit">Guardar</button>

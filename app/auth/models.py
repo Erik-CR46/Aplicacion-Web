@@ -34,6 +34,14 @@ class User(db.Model):
     def is_anonymous(self):
         return False
 
+    @property
+    # Indica que este objeto no representa a un usuario anonimo.
+    def serialize(self):
+        return {
+            'id':self.id,
+            'user':self.username
+        }
+
     # Devuelve el identificador que Flask-Login guardara en la sesion.
     # El controlador lo usara despues para recuperar el usuario desde la base de datos.
     def get_id(self):

@@ -1,6 +1,6 @@
 from flask_login import current_user, login_user, logout_user, login_required
 from flask_jwt_extended import create_access_token
-from flask import flash, g, Blueprint, redirect, render_template, url_for, request, jsonify
+from flask import flash, g, Blueprint, redirect, render_template, url_for, request, jsonify, session
 from app import login_manager, db
 from app.auth.models import User
 from app.auth.forms import LoginForm, RegisterForm
@@ -30,6 +30,7 @@ def register():
         return redirect(url_for('tasks.index'))
     
     form = RegisterForm()
+    login_form = LoginForm()
     if form.validate_on_submit():
         # Estos datos vienen de RegisterForm, que recibe el formulario HTML.
         username = form.username.data
@@ -39,7 +40,12 @@ def register():
         existing_user = User.query.filter_by(username=username).first()
         if existing_user:
             flash('Username already exists. Please choose a different one.', 'danger')
-            return render_template('user/register.html', form=form)
+            return render_template(
+                'user/index.html',
+                form=login_form,
+                register_form=form,
+                active_form='register',
+            )
 
         # User es el modelo SQLAlchemy que representa la tabla de usuarios.
         user = User(username=username, password=password)
@@ -47,10 +53,16 @@ def register():
         db.session.commit()
 
         flash('Registration successful! You can now log in.', 'success')
-
+        return redirect(url_for('auth.login'))
+    else:
         if form.errors:
             flash('Form validation failed. Please check your input.', 'danger')
-    return render_template('user/register.html', form=form)
+    return render_template(
+        'user/index.html',
+        form=login_form,
+        register_form=form,
+        active_form='register',
+    )
 
 @authRoute.route('/login', methods=['GET', 'POST'])
 def login():
@@ -60,6 +72,7 @@ def login():
         return redirect(url_for('tasks.index'))
     
     form = LoginForm()
+    register_form = RegisterForm()
     if form.validate_on_submit():
         # Los datos validados proceden del formulario de login.
         username = form.username.data
@@ -70,17 +83,28 @@ def login():
         
         if not(existing_user and existing_user.check_password(password)):
             flash('Invalid username or password.', 'danger')
-            return render_template('user/login.html', form=form)
+            return render_template(
+                'user/index.html',
+                form=form,
+                register_form=register_form,
+                active_form='login',
+            )
 
         # Función de Flask-Login: guarda el usuario en la sesión.
         login_user(existing_user)
+        session['user'] = existing_user.serialize
         flash('You have succesfully logged in.', 'succes')
         return redirect(url_for('tasks.index'))
 
 
     if form.errors:
         flash('Form validation failed. Please check your input.', 'danger')
-    return render_template('user/login.html', form=form)
+    return render_template(
+        'user/index.html',
+        form=form,
+        register_form=register_form,
+        active_form='login',
+    )
 
 @authRoute.route('/logout')
 @login_required

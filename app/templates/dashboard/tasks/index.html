@@ -1,61 +1,98 @@
 {% extends "dashboard/base.html" %}
-{% from "macro/pagination.html" import m_pagination%}
+{% from "macro/pagination.html" import m_pagination %}
 
-{% block title %} Index task {% endblock %}
+{% block title %}Coches | AutoGestión{% endblock %}
 
-{% block content %} 
+{% block content %}
+<div class="container-fluid fleet-content">
+    <header class="fleet-page-heading">
         <div>
-            <a href="{{ url_for('auth.logout') }}">
-                <button type="button">Cerrar sesión</button>
-            </a>
+            <p class="fleet-eyebrow">TU ESPACIO DE TRABAJO</p>
+            <h1>Gestión de vehículos</h1>
+            <p class="fleet-subtitle">Administra los coches de tu colección desde un solo lugar.</p>
         </div>
-        
-        <br>
+        <a class="btn btn-primary fleet-primary-button" href="{{ url_for('tasks.create') }}">
+            <span aria-hidden="true">+</span> Añadir coche
+        </a>
+    </header>
 
-        <a href="{{ url_for('tasks.create')}}">Create</a>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>
-                        ID
-                    </th>
-                    <th>
-                        Brand
-                    </th>
-                     <th>
-                        Model
-                    </th>
-                    <th>
-                        Options
-                    </th>
-                </tr>
-            </thead>
+    <div class="row g-4 align-items-start">
+        <aside class="col-12 col-lg-3 col-xl-2">
+            <section class="card fleet-overview-card">
+                <div class="card-body">
+                    <p class="fleet-eyebrow">RESUMEN</p>
+                    <h2>Tu colección</h2>
+                    <div class="fleet-total">{{ task_list.total }}</div>
+                    <p class="fleet-muted">coches registrados</p>
+                    <hr>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="fleet-muted">En esta página</span>
+                        <span class="badge rounded-pill fleet-count-badge">{{ task_list.items|length }}</span>
+                    </div>
+                </div>
+            </section>
+        </aside>
 
-            {% for i in task_list%}
-                <tbody>
-                    <tr>
-                        <td>
-                            {{i.id}}
-                        </td>
-                        
-                        <td>
-                            {{i.brand.name}}
-                        </td>
+        <section class="col-12 col-lg-9 col-xl-10" aria-labelledby="vehicle-list-title">
+            <div class="fleet-list-heading">
+                <div>
+                    <h2 id="vehicle-list-title">Vehículos</h2>
+                    <p class="fleet-muted">Mostrando {{ task_list.items|length }} de {{ task_list.total }}</p>
+                </div>
+            </div>
 
-                        <td>
-                            {{i.model}}
-                        </td>
+            {% if task_list.items %}
+            <div class="row g-3">
+                {% for i in task_list %}
+                <div class="col-12 col-md-6 col-xl-4">
+                    <article class="card vehicle-card h-100">
+                        <div class="vehicle-illustration" aria-hidden="true">
+                            {% if i.document and i.document.filename %}
+                                <img src="{{ url_for('tasks.document', id=i.document.id) }}" alt="{{ i.model }}" class="vehicle-photo">
+                            {% else %}
+                                <span class="vehicle-illustration-label">{{ i.brand.name }}</span>
+                                <svg viewBox="0 0 240 100" focusable="false">
+                                    <path d="M35 64h14l12-23c3-6 8-9 15-9h72c7 0 12 3 16 9l15 23h13c6 0 10 4 10 10v8h-15a17 17 0 0 1-33 0H87a17 17 0 0 1-33 0H39c-7 0-11-5-11-11v-1c0-4 3-6 7-6Z"/>
+                                    <path class="vehicle-window" d="m69 59 8-16c1-3 4-5 8-5h27v21Zm51 0V38h27c4 0 7 2 9 5l11 16Z"/>
+                                    <circle cx="70" cy="82" r="10"/>
+                                    <circle cx="170" cy="82" r="10"/>
+                                </svg>
+                            {% endif %}
+                        </div>
 
-                        <td>
-                            <a href="{{ url_for('tasks.update', id=i.id) }}">Edit</a>
-                            <a href="{{ url_for('tasks.delete', id=i.id)}}">Delete</a>
-                        </td>
-                    </tr>
-                </tbody>
-            {% endfor %}
-        </table>
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start gap-2">
+                                <div>
+                                    <p class="vehicle-brand">{{ i.brand.name }}</p>
+                                    <h3 class="vehicle-model">{{ i.model }}</h3>
+                                </div>
+                                <span class="vehicle-id">#{{ i.id }}</span>
+                            </div>
 
-        {{m_pagination(task_list)}}
-   
+                            <div class="vehicle-card-actions">
+                                <a class="btn btn-primary btn-sm" href="{{ url_for('tasks.update', id=i.id) }}">Editar</a>
+                                <a class="btn btn-outline-danger btn-sm" href="{{ url_for('tasks.delete', id=i.id) }}">Eliminar</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="card fleet-empty-state">
+                <div class="card-body">
+                    <div class="fleet-empty-icon" aria-hidden="true">⌁</div>
+                    <h3>Aún no hay coches</h3>
+                    <p class="fleet-muted">Añade el primero para empezar a organizar tu colección.</p>
+                    <a class="btn btn-primary fleet-primary-button" href="{{ url_for('tasks.create') }}">Añadir coche</a>
+                </div>
+            </div>
+            {% endif %}
+
+            <div class="fleet-pagination">
+                {{ m_pagination(task_list) }}
+            </div>
+        </section>
+    </div>
+</div>
 {% endblock %}
-
