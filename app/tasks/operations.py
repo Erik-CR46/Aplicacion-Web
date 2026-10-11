@@ -15,19 +15,29 @@ def getAll():
     tasks = db.session.query(models.Task).all()
     return tasks
 
-def create(name:str, brand_id:int=None):
-    # "name" viene del formulario, pero la columna de la base de datos se llama "model".
-    taskdb = models.Task(model=name, brand_id=brand_id)
+def create(name:str, price:int=0, gasoline_type_id:int=None, brand_id:int=None, km:int=0, cv:int=0, place:str=None):
+    taskdb = models.Task(
+        model=name,
+        brand_id=brand_id,
+        km=km,
+        cv=cv,
+        price=price,
+        place=place,
+        gasoline_type_id=gasoline_type_id,
+    )
     db.session.add(taskdb)
     db.session.commit()
     db.session.refresh(taskdb)
     return taskdb
 
-def update(id:int, name:str, brand_id:int=None, document_id:int=None):
+def update(id:int, name:str, brand_id:int=None, document_id:int=None, gasoline_type_id:int=None):
     taskdb = getById(id=id, show404=True)
 
     taskdb.model = name
     taskdb.brand_id = brand_id
+
+    if gasoline_type_id is not None:
+        taskdb.gasoline_type_id = gasoline_type_id
 
     if document_id is not None:
         taskdb.document_id = document_id

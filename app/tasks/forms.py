@@ -1,13 +1,16 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, FileField, SelectField, HiddenField
+from wtforms import StringField, FileField, SelectField, HiddenField, IntegerField
 from wtforms.validators import InputRequired
 
 class Task(FlaskForm):
-    # El formulario recibe el nombre de la tarea con la clave "name".
-    # Al guardarlo, operations.create() lo convierte en el atributo "model" del modelo.
-    name=StringField('Name', validators=[InputRequired()])
-    file=FileField('File',)
-    brand=SelectField('Brand', choices=[], coerce=int)
+    model = StringField('Modelo', validators=[InputRequired()])
+    km = IntegerField('Kilómetros')
+    cv = IntegerField('CV')
+    price = IntegerField('Precio')
+    place = StringField('Ubicación')
+    gasoline = SelectField('Combustible', choices=[], coerce=int)
+    file = FileField('File')
+    brand = SelectField('Brand', choices=[], coerce=int)
 
 class TaskTagAdd(FlaskForm):
     tag = SelectField('Tag', choices=[])

@@ -42,8 +42,19 @@ def document(id:int):
 def create():
     form = forms.Task()
     form.brand.choices = [(brand.id, brand.name) for brand in task_models.Brand.query.all()]
+    form.gasoline.choices = [(gas.id, gas.type) for gas in task_models.Gasoline.query.all()]
+
     if form.validate_on_submit():
-        operations.create(form.name.data, form.brand.data)
+        operations.create(
+            name=form.model.data,
+            brand_id=form.brand.data,
+            km=form.km.data,
+            cv=form.cv.data,
+            price=form.price.data,
+            place=form.place.data,
+            gasoline_type_id=form.gasoline.data,
+        )
+
         flash("The registry has been created successfully", "success")
         return redirect(url_for('tasks.index'))
     return render_template("dashboard/tasks/create.html", form=form)
@@ -60,6 +71,7 @@ def update(id:int):
     task = operations.getById(id, show404=True)
     form = forms.Task()
     form.brand.choices = [(brand.id, brand.name) for brand in task_models.Brand.query.all()]
+    form.gasoline.choices = [(gas.id, gas.type) for gas in task_models.Gasoline.query.all()]
 
     #tags
     form_tag = forms.TaskTagAdd()
@@ -73,17 +85,33 @@ def update(id:int):
         document = operations.getByIdDocument(task.document_id)
 
     if request.method == 'GET':
-        form.name.data = task.model
+        form.model.data = task.model
         form.brand.data = task.brand_id
+        form.km.data = task.km
+        form.cv.data = task.cv
+        form.price.data = task.price
+        form.place.data = task.place
+        form.gasoline.data = task.gasoline_type_id
 
     if form.validate_on_submit():
-        operations.update(id, form.name.data, form.brand.data)
+        operations.update(
+            id,
+            form.model.data,
+            form.brand.data,
+            gasoline_type_id=form.gasoline.data,
+        )
 
         if form.file.data and config.allowed_extensions_name(form.file.data.filename):
             taskdb_file = form.file.data
             filename = secure_filename(taskdb_file.filename)
             document = operations.createDocument(filename=filename, extension=filename.split('.')[-1], file=taskdb_file)
-            operations.update(id, form.name.data, form.brand.data, document.id)
+            operations.update(
+                id,
+                form.model.data,
+                form.brand.data,
+                document_id=document.id,
+                gasoline_type_id=form.gasoline.data,
+            )
 
         flash('Task updated successfully!', 'success')
 

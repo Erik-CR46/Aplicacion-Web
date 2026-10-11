@@ -1,38 +1,142 @@
 <div class="row">
     <div class="col">
         {% set error = '' %}
-        {% if form.name.errors %}
+        {% if form.brand.errors %}
             {% set error = 'is-invalid'%}
             <u>
-                {% for i in form.name.errors %}
+                {% for i in form.brand.errors %}
                     <p class="text-danger"> {{ i }} </p>
                 {% endfor %}
             </u>
         {% endif %}
 
         <div class="mb-3">
-            {{form.name.label(class="form-label")}}
-            {{form.name(class="form-control " + error)}}
+            {{form.brand.label(class="form-label")}}
+            {{form.brand(class="form-select")}}
         </div>
     </div>
 
     <div class="col">
-        <div class="mb-3">
-            {{form.brand.label(class="form-label")}}
-            {{form.brand(class="form-select")}}
-        </div>
-
-        {% if form.brand.errors %}
+        {% set error = '' %}
+        {% if form.model.errors %}
+            {% set error = 'is-invalid'%}
             <u>
-                {% for i in form.brand.errors %}
-                    <li>
-                        {{ i }}
-                    </li>
+                {% for i in form.model.errors %}
+                    <p class="text-danger"> {{ i }} </p>
                 {% endfor %}
             </u>
         {% endif %}
+
+        <div class="mb-3">
+            {{form.model.label(class="form-label")}}
+            {{form.model(class="form-control")}}
+        </div>
+
     </div>
 </div>
+
+<div class="row">
+    <div class="col">
+        {% set error = '' %}
+        {% if form.km.errors %}
+            {% set error = 'is-invalid'%}
+            <u>
+                {% for i in form.km.errors %}
+                    <p class="text-danger"> {{ i }} </p>
+                {% endfor %}
+            </u>
+        {% endif %}
+
+        <div class="mb-3">
+            {{form.km.label(class="form-label")}}
+            {{form.km(class="form-control")}}
+        </div>
+    </div>
+
+    <div class="col">
+
+        {% set error = '' %}
+        {% if form.cv.errors %}
+            {% set error = 'is-invalid'%}
+            <u>
+                {% for i in form.cv.errors %}
+                    <p class="text-danger"> {{ i }} </p>
+                {% endfor %}
+            </u>
+        {% endif %}
+
+        <div class="mb-3">
+            {{form.cv.label(class="form-label")}}
+            {{form.cv(class="form-control")}}
+        </div>
+    </div>
+</div>
+
+
+
+<div class="row">
+    <div class="col">
+        {% set error = '' %}
+        {% if form.price.errors %}
+            {% set error = 'is-invalid'%}
+            <u>
+                {% for i in form.price.errors %}
+                    <p class="text-danger"> {{ i }} </p>
+                {% endfor %}
+            </u>
+        {% endif %}
+
+        <div class="mb-3">
+            {{form.price.label(class="form-label")}}
+            {{form.price(class="form-control")}}
+        </div>
+    </div>
+
+    <div class="col">
+
+        {% set error = '' %}
+        {% if form.place.errors %}
+            {% set error = 'is-invalid'%}
+            <u>
+                {% for i in form.place.errors %}
+                    <p class="text-danger"> {{ i }} </p>
+                {% endfor %}
+            </u>
+        {% endif %}
+
+        <div class="mb-3">
+            {{form.place.label(class="form-label")}}
+            {{form.place(class="form-control")}}
+        </div>
+    </div>
+</div>
+
+
+
+<div class="row">
+    <div class="col">
+        {% set error = '' %}
+        {% if form.gasoline.errors %}
+            {% set error = 'is-invalid'%}
+            <u>
+                {% for i in form.gasoline.errors %}
+                    <p class="text-danger"> {{ i }} </p>
+                {% endfor %}
+            </u>
+        {% endif %}
+
+        <div class="mb-3">
+            {{form.gasoline.label(class="form-label")}}
+            {{form.gasoline(class="form-select")}}
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
 
 {% if form.errors %}
     <u>

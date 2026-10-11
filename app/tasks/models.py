@@ -20,6 +20,14 @@ class Task(db.Model):
     brand_id=db.Column(db.Integer, db.ForeignKey('brands.id'))
     brand = relationship("Brand", lazy="joined")
 
+    km=db.Column(db.Integer)
+    cv=db.Column(db.Integer)
+    price=db.Column(db.Integer)
+    place=db.Column(db.String(255))
+
+    gasoline_type_id=db.Column(db.Integer, db.ForeignKey('gasoline.id'))
+    gasoline = relationship("Gasoline", lazy="joined")
+
     tags = relationship("Tag", secondary=task_tags)
 
     @property
@@ -37,6 +45,11 @@ class Document(db.Model):
     filename=db.Column(db.String(255))
     extension=db.Column(db.String(10))
     task = relationship("Task", back_populates="document", foreign_keys="Task.document_id", uselist=False)
+
+class Gasoline(db.Model):
+    __tablename__ = 'gasoline'
+    id=db.Column(db.Integer, primary_key=True)
+    type=db.Column(db.String(255))
 
 class Brand(db.Model):
     __tablename__ = 'brands'
