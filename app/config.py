@@ -14,7 +14,8 @@ class Config(object):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = os.environ.get('SECRET_KEY', 'dev-secret-key')
     UPLOAD_FOLDER = os.path.realpath('.') + '/app/uploads'
-    JWT_ACCESS_TOKEN_EXPIRES = timedelta(hours=24) 
+    JWT_ACCESS_TOKEN_EXPIRES = timedelta(hours=24)
+    CACHE_TYPE = 'SimpleCache'
 
 
 class ProductionConfig(Config):
@@ -57,3 +58,4 @@ class TestingConfig(DevelopmentConfig):
     # En los tests no enviamos tokens CSRF junto con los formularios.
     # Esta opción evita que Flask-WTF rechace esas peticiones de prueba.
     WTF_CSRF_ENABLED = False
+    BABEL_DEFAULT_LOCALE = 'en'

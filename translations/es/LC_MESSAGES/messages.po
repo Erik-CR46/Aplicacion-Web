@@ -1,0 +1,660 @@
+# Spanish translations for PROJECT.
+# Copyright (C) 2026 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2026-10-21 22:39+0200\n"
+"PO-Revision-Date: 2026-10-21 22:38+0200\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: es\n"
+"Language-Team: es <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: app/auth/controllers.py:30 app/auth/controllers.py:72
+msgid "You are already logged in."
+msgstr "Ya has iniciado sesión."
+
+#: app/auth/controllers.py:43
+msgid "Username already exists. Please choose a different one."
+msgstr "Ese nombre de usuario ya existe. Elige otro."
+
+#: app/auth/controllers.py:56
+msgid "Registration successful! You can now log in."
+msgstr "¡Registro completado! Ya puedes iniciar sesión."
+
+#: app/auth/controllers.py:60 app/auth/controllers.py:102
+msgid "Form validation failed. Please check your input."
+msgstr "No se pudo validar el formulario. Revisa los datos introducidos."
+
+#: app/auth/controllers.py:86
+msgid "Invalid username or password."
+msgstr "El usuario o la contraseña no son válidos."
+
+#: app/auth/controllers.py:97
+msgid "You have succesfully logged in."
+msgstr "Has iniciado sesión correctamente."
+
+#: app/auth/forms.py:7 app/auth/forms.py:18 app/templates/user/index.html:38
+#: app/templates/user/index.html:88
+msgid "Username"
+msgstr "Usuario"
+
+#: app/auth/forms.py:7 app/auth/forms.py:9 app/auth/forms.py:13
+#: app/auth/forms.py:18 app/auth/forms.py:19 app/tasks/forms.py:7
+msgid "This field is required."
+msgstr "Este campo es obligatorio."
+
+#: app/auth/forms.py:8 app/auth/forms.py:19 app/templates/user/index.html:46
+#: app/templates/user/index.html:96
+msgid "Password"
+msgstr "Contraseña"
+
+#: app/auth/forms.py:10 app/auth/forms.py:14
+msgid "Passwords must match."
+msgstr "Las contraseñas deben coincidir."
+
+#: app/auth/forms.py:12 app/templates/user/index.html:104
+msgid "Confirm Password"
+msgstr "Confirmar contraseña"
+
+#: app/tasks/controllers.py:60
+msgid "The registry has been created successfully"
+msgstr "El vehículo se ha creado correctamente"
+
+#: app/tasks/controllers.py:68
+msgid "Task removed successfully!"
+msgstr "¡Vehículo eliminado correctamente!"
+
+#: app/tasks/controllers.py:118
+msgid "Task updated successfully!"
+msgstr "¡Vehículo actualizado correctamente!"
+
+#: app/tasks/forms.py:7
+msgid "Modelo"
+msgstr "Modelo"
+
+#: app/tasks/forms.py:8
+msgid "Kilómetros"
+msgstr "Kilómetros"
+
+#: app/tasks/forms.py:9
+msgid "CV"
+msgstr "CV"
+
+#: app/tasks/forms.py:10
+msgid "Precio"
+msgstr "Precio"
+
+#: app/tasks/forms.py:11
+msgid "Ubicación"
+msgstr "Ubicación"
+
+#: app/tasks/forms.py:12
+msgid "Combustible"
+msgstr "Combustible"
+
+#: app/tasks/forms.py:13
+msgid "Archivo"
+msgstr "Archivo"
+
+#: app/tasks/forms.py:14
+msgid "Marca"
+msgstr "Marca"
+
+#: app/tasks/forms.py:17 app/tasks/forms.py:20
+msgid "Etiqueta"
+msgstr "Etiqueta"
+
+#: app/templates/dashboard/base.html:22
+msgid "Abrir navegación"
+msgstr "Abrir navegación"
+
+#: app/templates/dashboard/base.html:34
+msgid "Inicio"
+msgstr "Inicio"
+
+#: app/templates/dashboard/base.html:37
+#: app/templates/dashboard/tasks/create.html:3
+#: app/templates/dashboard/tasks/create.html:9
+#: app/templates/dashboard/tasks/index.html:15
+#: app/templates/dashboard/tasks/index.html:87
+msgid "Añadir coche"
+msgstr "Añadir coche"
+
+#: app/templates/dashboard/base.html:54
+msgid "Profile"
+msgstr "Perfil"
+
+#: app/templates/dashboard/base.html:57
+msgid "Cerrar sesión"
+msgstr "Cerrar sesión"
+
+#: app/templates/dashboard/base.html:76
+msgid "Cerrar"
+msgstr "Cerrar"
+
+#: app/templates/dashboard/tasks/_form.html:160
+msgid "Guardar"
+msgstr "Guardar"
+
+#: app/templates/dashboard/tasks/create.html:8
+#: app/templates/dashboard/tasks/update.html:8
+msgid "COLECCIÓN"
+msgstr "COLECCIÓN"
+
+#: app/templates/dashboard/tasks/create.html:10
+msgid "Completa los datos para añadir un vehículo."
+msgstr "Completa los datos para añadir un vehículo."
+
+#: app/templates/dashboard/tasks/index.html:4
+msgid "Coches"
+msgstr "Coches"
+
+#: app/templates/dashboard/tasks/index.html:10
+msgid "TU ESPACIO DE TRABAJO"
+msgstr "TU ESPACIO DE TRABAJO"
+
+#: app/templates/dashboard/tasks/index.html:11
+msgid "Gestión de vehículos"
+msgstr "Gestión de vehículos"
+
+#: app/templates/dashboard/tasks/index.html:12
+msgid "Administra los coches de tu colección desde un solo lugar."
+msgstr "Administra los coches de tu colección desde un solo lugar."
+
+#: app/templates/dashboard/tasks/index.html:23
+msgid "RESUMEN"
+msgstr "RESUMEN"
+
+#: app/templates/dashboard/tasks/index.html:24
+msgid "Tu colección"
+msgstr "Tu colección"
+
+#: app/templates/dashboard/tasks/index.html:26
+msgid "coches registrados"
+msgstr "coches registrados"
+
+#: app/templates/dashboard/tasks/index.html:29
+msgid "En esta página"
+msgstr "En esta página"
+
+#: app/templates/dashboard/tasks/index.html:39
+msgid "Vehículos"
+msgstr "Vehículos"
+
+#: app/templates/dashboard/tasks/index.html:40
+#, python-format
+msgid "Mostrando %(shown)s de %(total)s"
+msgstr "Mostrando %(shown)s de %(total)s"
+
+#: app/templates/dashboard/tasks/index.html:73
+msgid "Editar"
+msgstr "Editar"
+
+#: app/templates/dashboard/tasks/index.html:74
+msgid "Eliminar"
+msgstr "Eliminar"
+
+#: app/templates/dashboard/tasks/index.html:85
+msgid "Aún no hay coches"
+msgstr "Aún no hay coches"
+
+#: app/templates/dashboard/tasks/index.html:86
+msgid "Añade el primero para empezar a organizar tu colección."
+msgstr "Añade el primero para empezar a organizar tu colección."
+
+#: app/templates/dashboard/tasks/update.html:3
+#: app/templates/dashboard/tasks/update.html:9
+msgid "Editar coche"
+msgstr "Editar coche"
+
+#: app/templates/dashboard/tasks/update.html:10
+msgid "Actualiza los datos y gestiona los archivos o etiquetas del vehículo."
+msgstr "Actualiza los datos y gestiona los archivos o etiquetas del vehículo."
+
+#: app/templates/dashboard/tasks/update.html:22
+msgid "Archivo actual:"
+msgstr "Archivo actual:"
+
+#: app/templates/dashboard/tasks/update.html:24
+msgid "Todavía no hay ningún archivo subido."
+msgstr "Todavía no hay ningún archivo subido."
+
+#: app/templates/dashboard/tasks/update.html:32
+msgid "Etiquetas"
+msgstr "Etiquetas"
+
+#: app/templates/dashboard/tasks/tag/assing.html:9
+msgid "Añadir etiqueta"
+msgstr "Añadir etiqueta"
+
+#: app/templates/dashboard/tasks/tag/index.html:8
+msgid "Quitar"
+msgstr "Quitar"
+
+#: app/templates/macro/pagination.html:6
+msgid "Previous page"
+msgstr "Página anterior"
+
+#: app/templates/macro/pagination.html:15
+#, python-format
+msgid "Page %(page)s"
+msgstr "Página %(page)s"
+
+#: app/templates/macro/pagination.html:21
+#, python-format
+msgid "Current page %(page)s"
+msgstr "Página actual %(page)s"
+
+#: app/templates/macro/pagination.html:30
+msgid "Next page"
+msgstr "Página siguiente"
+
+#: app/templates/user/index.html:8 app/templates/user/index.html:32
+#: app/templates/user/index.html:53 app/templates/user/index.html:116
+msgid "Login"
+msgstr "Iniciar sesión"
+
+#: app/templates/user/index.html:56
+msgid "Don't have an account?"
+msgstr "¿No tienes una cuenta?"
+
+#: app/templates/user/index.html:58 app/templates/user/index.html:82
+#: app/templates/user/index.html:111
+msgid "Sign up"
+msgstr "Registrarse"
+
+#: app/templates/user/index.html:68
+msgid "WELCOME BACK!"
+msgstr "¡QUÉ BUENO TENERTE DE VUELTA!"
+
+#: app/templates/user/index.html:71
+msgid "We are happy to have you back! If you need anything, we are here to help."
+msgstr ""
+"¡Nos alegra tenerte de vuelta! Si necesitas algo, estamos aquí para "
+"ayudarte."
+
+#: app/templates/user/index.html:114
+msgid "Already have an account?"
+msgstr "¿Ya tienes una cuenta?"
+
+#: app/templates/user/index.html:126
+msgid "WELCOME!"
+msgstr "¡TE DAMOS LA BIENVENIDA!"
+
+#: app/templates/user/index.html:129
+msgid ""
+"We are delighted to have you here. If you need any assistance, feel free "
+"to reach out."
+msgstr "Nos encanta que estés aquí. Si necesitas ayuda, no dudes en contactarnos."
+
+#~ msgid "d"
+#~ msgstr ""
+
+#~ msgid "{editor}: Editing failed"
+#~ msgstr ""
+
+#~ msgid "{editor}: Editing failed: {e}"
+#~ msgstr ""
+
+#~ msgid "Windows error: {error}"
+#~ msgstr ""
+
+#~ msgid "deprecated"
+#~ msgstr ""
+
+#~ msgid "Options"
+#~ msgstr ""
+
+#~ msgid "Got unexpected extra argument ({args})"
+#~ msgid_plural "Got unexpected extra arguments ({args})"
+#~ msgstr[0] ""
+#~ msgstr[1] ""
+
+#~ msgid "DeprecationWarning: The command {name!r} is deprecated.{extra_message}"
+#~ msgstr ""
+
+#~ msgid "Aborted!"
+#~ msgstr ""
+
+#~ msgid "Commands"
+#~ msgstr ""
+
+#~ msgid "Missing command."
+#~ msgstr ""
+
+#~ msgid "Value must be an iterable."
+#~ msgstr ""
+
+#~ msgid "Takes {nargs} values but 1 was given."
+#~ msgid_plural "Takes {nargs} values but {len} were given."
+#~ msgstr[0] ""
+#~ msgstr[1] ""
+
+#~ msgid ""
+#~ "DeprecationWarning: The {param_type} {name!r} "
+#~ "is deprecated.{extra_message}"
+#~ msgstr ""
+
+#~ msgid "Name '{name}' defined twice"
+#~ msgstr ""
+
+#~ msgid "Boolean option {decl!r} cannot use the same flag for true/false."
+#~ msgstr ""
+
+#~ msgid "Could not determine name for option with declarations {decls!r}"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "No options defined but a name was"
+#~ " passed ({name}). Did you mean to "
+#~ "declare an argument instead? Did you "
+#~ "mean to pass '--{name}'?"
+#~ msgstr ""
+
+#~ msgid "env var: {var}"
+#~ msgstr ""
+
+#~ msgid "default: {default}"
+#~ msgstr ""
+
+#~ msgid "required"
+#~ msgstr ""
+
+#~ msgid "(dynamic)"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Arguments take exactly one parameter "
+#~ "declaration, got {length}: {decls}."
+#~ msgstr ""
+
+#~ msgid "Do you want to continue?"
+#~ msgstr ""
+
+#~ msgid "Confirm the action without prompting."
+#~ msgstr ""
+
+#~ msgid "%(prog)s, version %(version)s"
+#~ msgstr ""
+
+#~ msgid "Show the version and exit."
+#~ msgstr ""
+
+#~ msgid "Show this message and exit."
+#~ msgstr ""
+
+#~ msgid "Did you mean {possibility}?"
+#~ msgid_plural "(Did you mean one of: {possibilities}?)"
+#~ msgstr[0] ""
+#~ msgstr[1] ""
+
+#~ msgid "Error: {message}"
+#~ msgstr ""
+
+#~ msgid "Try '{command} {option}' for help."
+#~ msgstr ""
+
+#~ msgid "Invalid value: {message}"
+#~ msgstr ""
+
+#~ msgid "Invalid value for {param_hint}: {message}"
+#~ msgstr ""
+
+#~ msgid "Missing argument"
+#~ msgstr ""
+
+#~ msgid "Missing option"
+#~ msgstr ""
+
+#~ msgid "Missing parameter"
+#~ msgstr ""
+
+#~ msgid "Missing {param_type}"
+#~ msgstr ""
+
+#~ msgid "Missing parameter: {param_name}"
+#~ msgstr ""
+
+#~ msgid "No such option {name!r}."
+#~ msgstr ""
+
+#~ msgid "No such command {name!r}."
+#~ msgstr ""
+
+#~ msgid "unknown error"
+#~ msgstr ""
+
+#~ msgid "Could not open file {filename!r}: {message}"
+#~ msgstr ""
+
+#~ msgid "Usage:"
+#~ msgstr ""
+
+#~ msgid "Invalid start character for option ({option})"
+#~ msgstr ""
+
+#~ msgid "Argument {name!r} takes {nargs} values."
+#~ msgstr ""
+
+#~ msgid "Option {name!r} does not take a value."
+#~ msgstr ""
+
+#~ msgid "Option {name!r} requires an argument."
+#~ msgid_plural "Option {name!r} requires {nargs} arguments."
+#~ msgstr[0] ""
+#~ msgstr[1] ""
+
+#~ msgid "Shell completion is not supported for Bash versions older than 4.4."
+#~ msgstr ""
+
+#~ msgid "Couldn't detect Bash version, shell completion is not supported."
+#~ msgstr ""
+
+#~ msgid "Repeat for confirmation"
+#~ msgstr ""
+
+#~ msgid "Error: The two entered values do not match."
+#~ msgstr ""
+
+#~ msgid "Error: invalid input"
+#~ msgstr ""
+
+#~ msgid "Unknown color {colour!r}"
+#~ msgstr ""
+
+#~ msgid "Press any key to continue..."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Choose from:\n"
+#~ "\t{choices}"
+#~ msgstr ""
+
+#~ msgid "{value!r} is not {choice}."
+#~ msgid_plural "{value!r} is not one of {choices}."
+#~ msgstr[0] ""
+#~ msgstr[1] ""
+
+#~ msgid "Choice({choices})"
+#~ msgstr ""
+
+#~ msgid "{value!r} does not match the format {format}."
+#~ msgid_plural "{value!r} does not match the formats {formats}."
+#~ msgstr[0] ""
+#~ msgstr[1] ""
+
+#~ msgid "{value!r} is not a valid {number_type}."
+#~ msgstr ""
+
+#~ msgid "{value} is not in the range {range}."
+#~ msgstr ""
+
+#~ msgid "{value!r} is not a valid boolean. Recognized values: {states}"
+#~ msgstr ""
+
+#~ msgid "{value!r} is not a valid UUID."
+#~ msgstr ""
+
+#~ msgid "file"
+#~ msgstr ""
+
+#~ msgid "directory"
+#~ msgstr ""
+
+#~ msgid "path"
+#~ msgstr ""
+
+#~ msgid "{name} {filename!r} does not exist."
+#~ msgstr ""
+
+#~ msgid "{name} {filename!r} is a file."
+#~ msgstr ""
+
+#~ msgid "{name} {filename!r} is a directory."
+#~ msgstr ""
+
+#~ msgid "{name} {filename!r} is not readable."
+#~ msgstr ""
+
+#~ msgid "{name} {filename!r} is not writable."
+#~ msgstr ""
+
+#~ msgid "{name} {filename!r} is not executable."
+#~ msgstr ""
+
+#~ msgid "{len_type} values are required, but {len_value} was given."
+#~ msgid_plural "{len_type} values are required, but {len_value} were given."
+#~ msgstr[0] ""
+#~ msgstr[1] ""
+
+#~ msgid "Unknown standard stream '{name}'"
+#~ msgstr ""
+
+#~ msgid "File does not have an approved extension: {extensions}"
+#~ msgstr ""
+
+#~ msgid "File does not have an approved extension."
+#~ msgstr ""
+
+#~ msgid "Invalid field name '%s'."
+#~ msgstr ""
+
+#~ msgid "Field must be equal to %(other_name)s."
+#~ msgstr ""
+
+#~ msgid "Field must be at least %(min)d character long."
+#~ msgid_plural "Field must be at least %(min)d characters long."
+#~ msgstr[0] ""
+#~ msgstr[1] ""
+
+#~ msgid "Field cannot be longer than %(max)d character."
+#~ msgid_plural "Field cannot be longer than %(max)d characters."
+#~ msgstr[0] ""
+#~ msgstr[1] ""
+
+#~ msgid "Field must be exactly %(max)d character long."
+#~ msgid_plural "Field must be exactly %(max)d characters long."
+#~ msgstr[0] ""
+#~ msgstr[1] ""
+
+#~ msgid "Field must be between %(min)d and %(max)d characters long."
+#~ msgstr ""
+
+#~ msgid "Number must be at least %(min)s."
+#~ msgstr ""
+
+#~ msgid "Number must be at most %(max)s."
+#~ msgstr ""
+
+#~ msgid "Number must be between %(min)s and %(max)s."
+#~ msgstr ""
+
+#~ msgid "Invalid input."
+#~ msgstr ""
+
+#~ msgid "Invalid email address."
+#~ msgstr ""
+
+#~ msgid "Invalid IP address."
+#~ msgstr ""
+
+#~ msgid "Invalid Mac address."
+#~ msgstr ""
+
+#~ msgid "Invalid URL."
+#~ msgstr ""
+
+#~ msgid "Invalid UUID."
+#~ msgstr ""
+
+#~ msgid "Invalid value, must be one of: %(values)s."
+#~ msgstr ""
+
+#~ msgid "Invalid value, can't be any of: %(values)s."
+#~ msgstr ""
+
+#~ msgid "This field cannot be edited."
+#~ msgstr ""
+
+#~ msgid "This field is disabled and cannot have a value."
+#~ msgstr ""
+
+#~ msgid "Invalid CSRF Token."
+#~ msgstr ""
+
+#~ msgid "CSRF token missing."
+#~ msgstr ""
+
+#~ msgid "CSRF failed."
+#~ msgstr ""
+
+#~ msgid "CSRF token expired."
+#~ msgstr ""
+
+#~ msgid "Invalid Choice: could not coerce."
+#~ msgstr ""
+
+#~ msgid "Choices cannot be None."
+#~ msgstr ""
+
+#~ msgid "Not a valid choice."
+#~ msgstr ""
+
+#~ msgid "Invalid choice(s): one or more data inputs could not be coerced."
+#~ msgstr ""
+
+#~ msgid "'%(value)s' is not a valid choice for this field."
+#~ msgid_plural "'%(value)s' are not valid choices for this field."
+#~ msgstr[0] ""
+#~ msgstr[1] ""
+
+#~ msgid "Not a valid datetime value."
+#~ msgstr ""
+
+#~ msgid "Not a valid date value."
+#~ msgstr ""
+
+#~ msgid "Not a valid time value."
+#~ msgstr ""
+
+#~ msgid "Not a valid week value."
+#~ msgstr ""
+
+#~ msgid "Not a valid integer value."
+#~ msgstr ""
+
+#~ msgid "Not a valid decimal value."
+#~ msgstr ""
+
+#~ msgid "Not a valid float value."
+#~ msgstr ""
+

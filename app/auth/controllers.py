@@ -1,6 +1,7 @@
 from flask_login import current_user, login_user, logout_user, login_required
 from flask_jwt_extended import create_access_token
 from flask import flash, g, Blueprint, redirect, render_template, url_for, request, jsonify, session
+from flask_babel import gettext
 from app import login_manager, db
 from app.auth.models import User
 from app.auth.forms import LoginForm, RegisterForm
@@ -26,7 +27,7 @@ def get_current_user():
 @authRoute.route('/register', methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
-        flash('You are already logged in.', 'info')
+        flash(gettext('You are already logged in.'), 'info')
         return redirect(url_for('tasks.index'))
     
     form = RegisterForm()
@@ -39,7 +40,7 @@ def register():
         # Evita registrar dos usuarios con el mismo nombre.
         existing_user = User.query.filter_by(username=username).first()
         if existing_user:
-            flash('Username already exists. Please choose a different one.', 'danger')
+            flash(gettext('Username already exists. Please choose a different one.'), 'danger')
             return render_template(
                 'user/index.html',
                 form=login_form,
@@ -52,11 +53,11 @@ def register():
         db.session.add(user)
         db.session.commit()
 
-        flash('Registration successful! You can now log in.', 'success')
+        flash(gettext('Registration successful! You can now log in.'), 'success')
         return redirect(url_for('auth.login'))
     else:
         if form.errors:
-            flash('Form validation failed. Please check your input.', 'danger')
+            flash(gettext('Form validation failed. Please check your input.'), 'danger')
     return render_template(
         'user/index.html',
         form=login_form,
@@ -68,7 +69,7 @@ def register():
 def login():
 
     if current_user.is_authenticated:
-        flash('You are already logged in.', 'info')
+        flash(gettext('You are already logged in.'), 'info')
         return redirect(url_for('tasks.index'))
     
     form = LoginForm()
@@ -82,7 +83,7 @@ def login():
         existing_user = User.query.filter_by(username=username).first()
         
         if not(existing_user and existing_user.check_password(password)):
-            flash('Invalid username or password.', 'danger')
+            flash(gettext('Invalid username or password.'), 'danger')
             return render_template(
                 'user/index.html',
                 form=form,
@@ -93,12 +94,12 @@ def login():
         # Función de Flask-Login: guarda el usuario en la sesión.
         login_user(existing_user)
         session['user'] = existing_user.serialize
-        flash('You have succesfully logged in.', 'succes')
+        flash(gettext('You have succesfully logged in.'), 'succes')
         return redirect(url_for('tasks.index'))
 
 
     if form.errors:
-        flash('Form validation failed. Please check your input.', 'danger')
+        flash(gettext('Form validation failed. Please check your input.'), 'danger')
     return render_template(
         'user/index.html',
         form=form,

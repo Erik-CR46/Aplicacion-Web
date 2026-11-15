@@ -1,7 +1,7 @@
 import os
 from sqlalchemy.orm import session
 from app.tasks import models
-from app import app, db, config
+from app import app, db, config, cache
 
 
 def getById(id: int, show404=False):
@@ -14,6 +14,14 @@ def getById(id: int, show404=False):
 def getAll():
     tasks = db.session.query(models.Task).all()
     return tasks
+
+@cache.memoize(timeout=300)
+def getBrandChoices():
+    return [(brand.id, brand.name) for brand in models.Brand.query.all()]
+
+@cache.memorize(timeout=300)
+def getTypeGasoline():
+    return [(gas.id, gas.type) for gas in models.Gasoline.query.all()]
 
 def create(name:str, price:int=0, gasoline_type_id:int=None, brand_id:int=None, km:int=0, cv:int=0, place:str=None):
     taskdb = models.Task(

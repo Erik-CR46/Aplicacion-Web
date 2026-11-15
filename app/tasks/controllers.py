@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, abort, send_from_directory
 from flask_login import login_required
+from flask_babel import gettext
 from app.tasks import operations, forms, models as task_models
 from werkzeug.utils import secure_filename
 from app import app, config
@@ -25,6 +26,7 @@ def index():
     #print(operations.getAll())
     #print(operations.delete(4))
     #print(operations.pagination().items)
+
     return render_template("dashboard/tasks/index.html", task_list= operations.pagination(request.args.get('page', 1, type=int)))
 
 @taskRoute.route('/document/<int:id>')
@@ -41,8 +43,8 @@ def document(id:int):
 @taskRoute.route('/create', methods=('GET', 'POST'))
 def create():
     form = forms.Task()
-    form.brand.choices = [(brand.id, brand.name) for brand in task_models.Brand.query.all()]
-    form.gasoline.choices = [(gas.id, gas.type) for gas in task_models.Gasoline.query.all()]
+    form.brand.choices = operations.getBrandChoices()
+    form.gasoline.choices = operations.getTypeGasoline()
 
     if form.validate_on_submit():
         operations.create(
@@ -55,7 +57,7 @@ def create():
             gasoline_type_id=form.gasoline.data,
         )
 
-        flash("The registry has been created successfully", "success")
+        flash(gettext("The registry has been created successfully"), "success")
         return redirect(url_for('tasks.index'))
     return render_template("dashboard/tasks/create.html", form=form)
 
@@ -63,7 +65,7 @@ def create():
 def delete(id:int):
     operations.deleteDocument(id)
     operations.delete(id)
-    flash('Task removed successfully!', 'success')
+    flash(gettext('Task removed successfully!'), 'success')
     return redirect(url_for('tasks.index'))
 
 @taskRoute.route('/update/<int:id>', methods=['GET', 'POST'])
@@ -113,7 +115,7 @@ def update(id:int):
                 gasoline_type_id=form.gasoline.data,
             )
 
-        flash('Task updated successfully!', 'success')
+        flash(gettext('Task updated successfully!'), 'success')
 
         return redirect(url_for('tasks.index'))
 

@@ -19,7 +19,7 @@
                 <span>AutoGestión</span>
             </a>
             <!-- Bootstrap: 'navbar-toggler' crea el botón hamburguesa para móviles; 'data-bs-toggle="collapse"' activa el menú colapsable -->
-            <button class="navbar-toggler" type="button" data-bs-target="#navbarApp" data-bs-toggle="collapse" aria-label="Abrir navegación">
+            <button class="navbar-toggler" type="button" data-bs-target="#navbarApp" data-bs-toggle="collapse" aria-label="{{ _('Abrir navegación') }}">
                 <!-- Bootstrap: 'navbar-toggler-icon' dibuja el icono del botón de menú -->
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -31,10 +31,10 @@
                     <!-- Bootstrap: 'nav-item' define cada elemento dentro de la navegación -->
                     <li class="nav-item">
                         <!-- Bootstrap: 'nav-link' aplica estilo de enlace de navegación -->
-                        <a class="nav-link" href="{{ url_for('tasks.index') }}">Inicio</a>
+                        <a class="nav-link" href="{{ url_for('tasks.index') }}">{{ _('Inicio') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('tasks.create') }}">Añadir coche</a>
+                        <a class="nav-link" href="{{ url_for('tasks.create') }}">{{ _('Añadir coche') }}</a>
                     </li>
                 </ul>
 
@@ -51,10 +51,10 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <!-- Bootstrap: 'dropdown-item' define cada opción del menú desplegable -->
-                                <a class="dropdown-item" href="#">Profile</a>
+                                <a class="dropdown-item" href="#">{{ _('Profile') }}</a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="{{ url_for('auth.logout') }}">Cerrar sesión</a>
+                                <a class="dropdown-item" href="{{ url_for('auth.logout') }}">{{ _('Cerrar sesión') }}</a>
                             </li>
                         </ul>
                     </li>
@@ -73,7 +73,7 @@
                         <div class="alert alert-success alert-dismissible fade show" role="status">
                             {{ message }}
                             <!-- Bootstrap: 'btn-close' crea el botón de cerrar la alerta; 'data-bs-dismiss="alert"' permite ocultarla -->
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="{{ _('Cerrar') }}"></button>
                         </div>
                     {% endfor %}
                 </div>

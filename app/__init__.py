@@ -1,15 +1,27 @@
-from flask import Flask
+import os
+
+from flask import Flask, request
 from app.config import DevelopmentConfig
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_restful import Api
 from flask_jwt_extended import JWTManager
+from flask_caching import Cache
+from flask_babel import Babel
 
 app = Flask(__name__, static_folder='assets')
 app.config.from_object(DevelopmentConfig)
+app.config['BABEL_TRANSLATION_DIRECTORIES'] = os.path.abspath(
+    os.path.join(app.root_path, '..', 'translations')
+)
 
 db = SQLAlchemy(app)
+
+#Cache
+cache = Cache()
+cache.init_app(app)
+
 from app.api.task import TaskApi, TaskPagination
 from app.api.brands_arg import BrandArgApi
 from app.api.tags_args import TagArgApi
@@ -27,6 +39,14 @@ login_manager.login_view = 'auth.login'
 #jwt
 jwt = JWTManager()
 jwt.init_app(app)
+
+
+#Babel
+def get_locale():
+    return request.accept_languages.best_match(['es', 'en'])
+
+babel = Babel(app, locale_selector=get_locale)
+
 
 #RestApi
 api = Api(app)

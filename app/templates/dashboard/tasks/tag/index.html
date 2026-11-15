@@ -5,7 +5,7 @@
             <form action="{{ url_for('tasks.remove_tag', id=id) }}" method="post" class="ms-auto">
                 {{ formTagRemove.csrf_token }}
                 {{ formTagRemove.tag(value=i.id) }}
-                <button class="btn btn-outline-danger btn-sm" type="submit">Quitar</button>
+                <button class="btn btn-outline-danger btn-sm" type="submit">{{ _('Quitar') }}</button>
             </form>
         </li>
     {% endfor %}    

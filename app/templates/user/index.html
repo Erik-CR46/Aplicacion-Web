@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Login</title>
+    <title>{{ _('Login') }}</title>
 
     <link rel="stylesheet" href="{{ url_for('static', filename='user/style.css') }}">
 </head>
@@ -29,13 +29,13 @@
 
             <div class="form">
 
-                <h2>Login</h2>
+                <h2>{{ _('Login') }}</h2>
 
                 <form class="auth-form" action="{{ url_for('auth.login') }}" method="post" novalidate>
                     {{ form.hidden_tag() }}
 
                     <div class="input-box">
-                        {{ form.username(class="auth-input", placeholder="Username", autocomplete="username", aria_label="Username") }}
+                        {{ form.username(class="auth-input", placeholder=_('Username'), autocomplete="username", aria_label=_('Username')) }}
                         <span aria-hidden="true">♟</span>
                         {% for error in form.username.errors %}
                         <small class="field-error">{{ error }}</small>
@@ -43,19 +43,19 @@
                     </div>
 
                     <div class="input-box">
-                        {{ form.password(class="auth-input", placeholder="Password", autocomplete="current-password", aria_label="Password") }}
+                        {{ form.password(class="auth-input", placeholder=_('Password'), autocomplete="current-password", aria_label=_('Password')) }}
                         <span aria-hidden="true">🔒</span>
                         {% for error in form.password.errors %}
                         <small class="field-error">{{ error }}</small>
                         {% endfor %}
                     </div>
 
-                    <button type="submit">Login</button>
+                    <button type="submit">{{ _('Login') }}</button>
                 </form>
 
-                <p>Don't have an account?</p>
+                <p>{{ _("Don't have an account?") }}</p>
 
-                <a href="#" id="showRegister">Sign up</a>
+                <a href="#" id="showRegister">{{ _('Sign up') }}</a>
 
             </div>
 
@@ -65,13 +65,10 @@
         <!-- BIENVENIDA LOGIN -->
         <div class="welcome welcome-login">
 
-            <h1>WELCOME<br>BACK!</h1>
+            <h1>{{ _('WELCOME BACK!') }}</h1>
 
             <p>
-                We're happy to have<br>
-                you back with us again!
-                If you need anything,
-                we're here to help.
+                {{ _('We are happy to have you back! If you need anything, we are here to help.') }}
             </p>
 
         </div>
@@ -82,13 +79,13 @@
 
             <div class="form">
 
-                <h2>Sign up</h2>
+                <h2>{{ _('Sign up') }}</h2>
 
                 <form class="auth-form" action="{{ url_for('auth.register') }}" method="post" novalidate>
                     {{ register_form.hidden_tag() }}
 
                     <div class="input-box">
-                        {{ register_form.username(class="auth-input", placeholder="Username", autocomplete="username", aria_label="Username") }}
+                        {{ register_form.username(class="auth-input", placeholder=_('Username'), autocomplete="username", aria_label=_('Username')) }}
                         <span aria-hidden="true">♟</span>
                         {% for error in register_form.username.errors %}
                         <small class="field-error">{{ error }}</small>
@@ -96,7 +93,7 @@
                     </div>
 
                     <div class="input-box">
-                        {{ register_form.password(class="auth-input", placeholder="Password", autocomplete="new-password", aria_label="Password") }}
+                        {{ register_form.password(class="auth-input", placeholder=_('Password'), autocomplete="new-password", aria_label=_('Password')) }}
                         <span aria-hidden="true">🔒</span>
                         {% for error in register_form.password.errors %}
                         <small class="field-error">{{ error }}</small>
@@ -104,19 +101,19 @@
                     </div>
 
                     <div class="input-box">
-                        {{ register_form.confirm_password(class="auth-input", placeholder="Confirm password", autocomplete="new-password", aria_label="Confirm password") }}
+                        {{ register_form.confirm_password(class="auth-input", placeholder=_('Confirm Password'), autocomplete="new-password", aria_label=_('Confirm Password')) }}
                         <span aria-hidden="true">🔒</span>
                         {% for error in register_form.confirm_password.errors %}
                         <small class="field-error">{{ error }}</small>
                         {% endfor %}
                     </div>
 
-                    <button type="submit">Sign up</button>
+                    <button type="submit">{{ _('Sign up') }}</button>
                 </form>
 
-                <p>Already have an account?</p>
+                <p>{{ _('Already have an account?') }}</p>
 
-                <a href="#" id="showLogin">Login</a>
+                <a href="#" id="showLogin">{{ _('Login') }}</a>
 
             </div>
 
@@ -126,14 +123,10 @@
         <!-- BIENVENIDA REGISTER -->
         <div class="welcome welcome-register">
 
-            <h1>WELCOME!</h1>
+            <h1>{{ _('WELCOME!') }}</h1>
 
             <p>
-                We're delighted to
-                have you here.
-                If you need any
-                assistance,
-                feel free to reach out.
+                {{ _('We are delighted to have you here. If you need any assistance, feel free to reach out.') }}
             </p>
 
         </div>

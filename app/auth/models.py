@@ -6,7 +6,7 @@ from app import db
 # El controlador de autenticacion usara esta clase para buscar usuarios durante
 # el login, y Flask-Login usara sus propiedades para mantener la sesion activa.
 class User(db.Model):
-    table_name = 'users'
+    __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
