@@ -2,6 +2,7 @@ import os
 from sqlalchemy.orm import session
 from app.auth import models
 from app import app, db, config, cache
+from werkzeug.security import generate_password_hash
 
 
 def getById(id: int, show404=False):
@@ -13,11 +14,29 @@ def getById(id: int, show404=False):
 
 
 
-def update(id: int, first_name: str, last_name: str, email: str):
+def update(id: int, first_name: str, last_name: str, email: str, address: str, password: str = None, username: str = None):
     userdb = getById(id=id, show404=True)
     userdb.first_name = first_name
     userdb.last_name = last_name
     userdb.email = email
+    userdb.username = username
+    address = address.strip()
+
+    if password:
+        userdb.pwhash = generate_password_hash(password)
+        
+    if address:
+        if userdb.address is not None:
+            userdb.address.address = address
+            db.session.add(userdb.address)
+        else:
+            addressdb = models.Address(address=address)
+            db.session.add(addressdb)
+            db.session.flush()
+            userdb.address_id = addressdb.id
+    else:
+        userdb.address_id = None
+
     db.session.add(userdb)
     db.session.commit()
     db.session.refresh(userdb)

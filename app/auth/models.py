@@ -27,6 +27,8 @@ class User(db.Model):
     avatar_id = db.Column(db.Integer, db.ForeignKey('files.id'), nullable=True)
     address_id = db.Column(db.Integer, db.ForeignKey('addresses.id'), nullable=True)
 
+    address = relationship('Address', lazy='joined')
+
     avatar = relationship('Document', lazy='joined')
     social_networks = relationship('SocialNetwork', lazy='joined', secondary='user_social_networks')
     

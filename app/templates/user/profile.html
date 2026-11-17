@@ -44,6 +44,17 @@
                         <dd class="col-sm-7 py-2 mb-0 text-break">
                             {{ current_user.email or 'No indicado' }}
                         </dd>
+                        
+
+                        <dt class="col-sm-5 text-secondary fw-semibold py-2">Dirección</dt>
+                        <dd class="col-sm-7 py-2 mb-0">
+                            {% if current_user.address %}
+                                {{ current_user.address.address }}
+                            {% else %}
+                                No indicada
+                            {% endif %}
+                        </dd>
+
 
                         <dt class="col-sm-5 text-secondary fw-semibold py-2">Idioma</dt>
                         <dd class="col-sm-7 py-2 mb-0">

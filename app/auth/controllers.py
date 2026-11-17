@@ -4,7 +4,7 @@ from flask import flash, g, Blueprint, redirect, render_template, url_for, reque
 from flask_babel import gettext
 from app import login_manager, db
 from app.auth.models import User
-from app.auth.forms import LoginForm, RegisterForm, ChangeInformation
+from app.auth.forms import LoginForm, RegisterForm, ChangeInformation, ChangeAddress, ChangePasswordForm
 from app.auth.helpers import authenticate
 from app.auth import operations
 
@@ -152,27 +152,39 @@ def profile():
 def profile_edit():
     form = ChangeInformation()
 
+    formAddress = ChangeAddress()
+
+    formPassword = ChangePasswordForm()
+
     if request.method == 'GET':
         form.name.data = current_user.first_name
         form.lastname.data = current_user.last_name
         form.email.data = current_user.email
+        formPassword.username.data = current_user.username
+        if current_user.address is None:
+            formAddress.address.data = ''
+        else:
+            formAddress.address.data = current_user.address.address
 
-    if form.validate_on_submit():
+    if form.validate_on_submit() and formPassword.validate_on_submit() and formAddress.validate_on_submit():
         email = form.email.data.strip()
         existing_user = User.query.filter(
             User.email == email,
             User.id != current_user.id,
         ).first()
         if existing_user:
-            form.email.errors.append(gettext('That email address is already in use.'))
+            form.email.errors.append(gettext('Este email ya está en uso.'))
         else:
             operations.update(
                 id=current_user.id,
                 first_name=form.name.data.strip(),
                 last_name=form.lastname.data.strip(),
                 email=email,
+                address=formAddress.address.data.strip(),
+                username=formPassword.username.data.strip(),
+                password=formPassword.password.data.strip() if formPassword.password.data else None
             )
             flash(gettext('Profile updated successfully.'), 'success')
             return redirect(url_for('auth.profile'))
 
-    return render_template('user/profile_edit.html', changeInformation=form)
+    return render_template('user/profile_edit.html', changeInformation=form, changeAddress=formAddress, changePassword=formPassword)

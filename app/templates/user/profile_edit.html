@@ -5,7 +5,7 @@
 {% block content %}
 <section class="container py-5">
     <div class="row justify-content-center">
-        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+        <div class="col-12 col-lg-10 col-xl-9">
             <article class="card border-0 shadow rounded-4 overflow-hidden" aria-labelledby="profile-title">
                 <header class="card-header border-0 text-white p-4 p-md-5"
                         style="background: linear-gradient(135deg, #17324d, #176b87);">
@@ -25,39 +25,87 @@
                     <p class="text-secondary mb-4">Tus datos personales</p>
                     <form method="POST" action="{{ url_for('auth.profile_edit') }}">
                         {{ changeInformation.hidden_tag() }}
+                        {{ changeAddress.hidden_tag() }}
+                        {{ changePassword.hidden_tag() }}
 
-                        <div class="mb-3">
-                            {{ changeInformation.name.label(class="form-label") }}
-                            {{ changeInformation.name(class="form-control") }}
-                            {% for error in changeInformation.name.errors %}
-                                <div class="text-danger small mt-1">{{ error }}</div>
-                            {% endfor %}
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <section class="border rounded-4 p-4 h-100">
+                                    <h2 class="h5 fw-semibold mb-3">Aspectos generales</h2>
+
+                                    <div class="mb-3">
+                                        {{ changeInformation.name.label(class="form-label") }}
+                                        {{ changeInformation.name(class="form-control") }}
+                                        {% for error in changeInformation.name.errors %}
+                                            <div class="text-danger small mt-1">{{ error }}</div>
+                                        {% endfor %}
+                                    </div>
+
+                                    <div class="mb-3">
+                                        {{ changeInformation.lastname.label(class="form-label") }}
+                                        {{ changeInformation.lastname(class="form-control") }}
+                                        {% for error in changeInformation.lastname.errors %}
+                                            <div class="text-danger small mt-1">{{ error }}</div>
+                                        {% endfor %}
+                                    </div>
+
+                                    <div class="mb-3">
+                                        {{ changeInformation.email.label(class="form-label") }}
+                                        {{ changeInformation.email(class="form-control") }}
+                                        {% for error in changeInformation.email.errors %}
+                                            <div class="text-danger small mt-1">{{ error }}</div>
+                                        {% endfor %}
+                                    </div>
+
+                                    <div class="mb-3">
+                                        {{ changeAddress.address.label(class="form-label") }}
+                                        {{ changeAddress.address(class="form-control", rows=3) }}
+                                        {% for error in changeAddress.address.errors %}
+                                            <div class="text-danger small mt-1">{{ error }}</div>
+                                        {% endfor %}
+                                    </div>
+                                </section>
+                            </div>
+
+                            <div class="col-md-6">
+                                <section class="border rounded-4 p-4 h-100">
+                                    <h2 class="h5 fw-semibold mb-3">Usuario y contraseña</h2>
+
+                                    <div class="mb-3">
+                                        {{ changePassword.username.label(class="form-label") }}
+                                        {{ changePassword.username(class="form-control") }}
+                                        {% for error in changePassword.username.errors %}
+                                            <div class="text-danger small mt-1">{{ error }}</div>
+                                        {% endfor %}
+                                    </div>
+
+                                    <div class="mb-3">
+                                        {{ changePassword.password.label(class="form-label") }}
+                                        {{ changePassword.password(class="form-control") }}
+                                        {% for error in changePassword.password.errors %}
+                                            <div class="text-danger small mt-1">{{ error }}</div>
+                                        {% endfor %}
+                                    </div>
+
+                                    <div class="mb-3">
+                                        {{ changePassword.confirm_password.label(class="form-label") }}
+                                        {{ changePassword.confirm_password(class="form-control") }}
+                                        {% for error in changePassword.confirm_password.errors %}
+                                            <div class="text-danger small mt-1">{{ error }}</div>
+                                        {% endfor %}
+                                    </div>
+                                </section>
+                            </div>
                         </div>
 
-                        <div class="mb-3">
-                            {{ changeInformation.lastname.label(class="form-label") }}
-                            {{ changeInformation.lastname(class="form-control") }}
-                            {% for error in changeInformation.lastname.errors %}
-                                <div class="text-danger small mt-1">{{ error }}</div>
-                            {% endfor %}
-                        </div>
-
-                        <div class="mb-4">
-                            {{ changeInformation.email.label(class="form-label") }}
-                            {{ changeInformation.email(class="form-control") }}
-                            {% for error in changeInformation.email.errors %}
-                                <div class="text-danger small mt-1">{{ error }}</div>
-                            {% endfor %}
-                        </div>
-
-                        <div class="border-top pt-4 d-flex gap-2">
-                        <a class="btn btn-outline-primary rounded-pill px-4"
-                           href="{{ url_for('auth.profile') }}">
-                            Descartar
-                        </a>
-                        <button class="btn btn-primary rounded-pill px-4" type="submit">
-                            Guardar
-                        </button>
+                        <div class="border-top pt-4 mt-4 d-flex gap-2">
+                            <a class="btn btn-outline-primary rounded-pill px-4"
+                               href="{{ url_for('auth.profile') }}">
+                                Descartar
+                            </a>
+                            <button class="btn btn-primary rounded-pill px-4" type="submit">
+                                Guardar
+                            </button>
                         </div>
                     </form>
                 </div>
