@@ -41,6 +41,7 @@ def document(id:int):
 
 
 @taskRoute.route('/create', methods=('GET', 'POST'))
+@login_required
 def create():
     form = forms.Task()
     form.brand.choices = operations.getBrandChoices()

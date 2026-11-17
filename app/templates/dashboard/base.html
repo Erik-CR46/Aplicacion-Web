@@ -51,7 +51,7 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <!-- Bootstrap: 'dropdown-item' define cada opción del menú desplegable -->
-                                <a class="dropdown-item" href="#">{{ _('Profile') }}</a>
+                                <a class="dropdown-item" href=" {{url_for('auth.profile')}} ">{{ _('Profile') }}</a>
                             </li>
                             <li>
                                 <a class="dropdown-item" href="{{ url_for('auth.logout') }}">{{ _('Cerrar sesión') }}</a>

@@ -2,6 +2,7 @@ import os
 from sqlalchemy.orm import session
 from app.tasks import models
 from app import app, db, config, cache
+from flask_login import current_user
 
 
 def getById(id: int, show404=False):
@@ -19,9 +20,10 @@ def getAll():
 def getBrandChoices():
     return [(brand.id, brand.name) for brand in models.Brand.query.all()]
 
-@cache.memorize(timeout=300)
+@cache.memoize(timeout=300)
 def getTypeGasoline():
     return [(gas.id, gas.type) for gas in models.Gasoline.query.all()]
+
 
 def create(name:str, price:int=0, gasoline_type_id:int=None, brand_id:int=None, km:int=0, cv:int=0, place:str=None):
     taskdb = models.Task(
@@ -32,6 +34,7 @@ def create(name:str, price:int=0, gasoline_type_id:int=None, brand_id:int=None, 
         price=price,
         place=place,
         gasoline_type_id=gasoline_type_id,
+        user_id = current_user.id
     )
     db.session.add(taskdb)
     db.session.commit()

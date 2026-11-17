@@ -1,0 +1,74 @@
+{% extends "dashboard/base.html" %}
+
+{% block title %}Perfil | AutoGestión{% endblock %}
+
+{% block content %}
+<section class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+            <article class="card border-0 shadow rounded-4 overflow-hidden" aria-labelledby="profile-title">
+                <header class="card-header border-0 text-white p-4 p-md-5"
+                        style="background: linear-gradient(135deg, #17324d, #176b87);">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="rounded-circle bg-white text-primary d-flex align-items-center justify-content-center fw-bold fs-3 flex-shrink-0"
+                             style="width: 68px; height: 68px;" aria-hidden="true">
+                            {{ (current_user.first_name or current_user.username or 'U')[:1]|upper }}
+                        </div>
+                        <div>
+                            <p class="text-uppercase small fw-semibold mb-1 opacity-75">Mi cuenta</p>
+                            <h1 class="h2 fw-bold mb-0" id="profile-title">Perfil</h1>
+                        </div>
+                    </div>
+                </header>
+
+                <div class="card-body p-4 p-md-5">
+                    <p class="text-secondary mb-4">Tus datos personales</p>
+
+                    <dl class="row mb-0">
+                        <dt class="col-sm-5 text-secondary fw-semibold py-2">Nombre</dt>
+                        <dd class="col-sm-7 py-2 mb-0">
+                            {{ current_user.first_name or 'No indicado' }}
+                        </dd>
+
+                        <dt class="col-sm-5 text-secondary fw-semibold py-2">Apellidos</dt>
+                        <dd class="col-sm-7 py-2 mb-0">
+                            {{ current_user.last_name or 'No indicados' }}
+                        </dd>
+
+                        <dt class="col-sm-5 text-secondary fw-semibold py-2">Usuario</dt>
+                        <dd class="col-sm-7 py-2 mb-0">
+                            {{ current_user.username or 'No indicado' }}
+                        </dd>
+
+                        <dt class="col-sm-5 text-secondary fw-semibold py-2">Correo electrónico</dt>
+                        <dd class="col-sm-7 py-2 mb-0 text-break">
+                            {{ current_user.email or 'No indicado' }}
+                        </dd>
+
+                        <dt class="col-sm-5 text-secondary fw-semibold py-2">Idioma</dt>
+                        <dd class="col-sm-7 py-2 mb-0">
+                            {% if current_user.lang %}
+                                {{ current_user.lang.value|upper }}
+                            {% else %}
+                                No indicado
+                            {% endif %}
+                        </dd>
+                    </dl>
+
+                    <div class="border-top mt-4 pt-4">
+                        <a class="btn btn-outline-primary rounded-pill px-4"
+                           href="{{ url_for('tasks.index') }}">
+                            Volver al inicio
+                        </a>
+                        <a class="btn btn-outline-primary rounded-pill px-4"
+                           href="{{ url_for('auth.profile_edit') }}">
+                            Editar perfil
+                        </a>
+
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+{% endblock %}

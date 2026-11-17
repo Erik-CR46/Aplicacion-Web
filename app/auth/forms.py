@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField
+from wtforms import StringField, PasswordField, EmailField
 from wtforms.validators import InputRequired, EqualTo
 from flask_babel import lazy_gettext as _
 
@@ -17,3 +17,9 @@ class RegisterForm(FlaskForm):
 class LoginForm(FlaskForm):
     username = StringField(_('Username'), [InputRequired(message=_('This field is required.'))])
     password = PasswordField(_('Password'), [InputRequired(message=_('This field is required.'))])
+
+class ChangeInformation(FlaskForm):
+    name = StringField(_('Nombre'), [InputRequired(message=_('This field is required.'))])
+    lastname = StringField(_('Segundo nombre'), [InputRequired(message=_('This field is required.'))])
+    email = EmailField(_('Email'), [InputRequired(message=_('This field is required.'))])
+    

@@ -4,8 +4,9 @@ from flask import flash, g, Blueprint, redirect, render_template, url_for, reque
 from flask_babel import gettext
 from app import login_manager, db
 from app.auth.models import User
-from app.auth.forms import LoginForm, RegisterForm
+from app.auth.forms import LoginForm, RegisterForm, ChangeInformation
 from app.auth.helpers import authenticate
+from app.auth import operations
 
 authRoute = Blueprint('auth', __name__)
 
@@ -141,3 +142,37 @@ def api():
     # Función de Flask-JWT-Extended: genera el token para futuras peticiones.
     access_token = create_access_token(identity=str(user.id))
     return jsonify(access_token=access_token), 200
+
+@authRoute.route('/user/profile')
+def profile():
+    return render_template('user/profile.html')
+
+@authRoute.route('/user/profile_edit', methods=['GET', 'POST'])
+@login_required
+def profile_edit():
+    form = ChangeInformation()
+
+    if request.method == 'GET':
+        form.name.data = current_user.first_name
+        form.lastname.data = current_user.last_name
+        form.email.data = current_user.email
+
+    if form.validate_on_submit():
+        email = form.email.data.strip()
+        existing_user = User.query.filter(
+            User.email == email,
+            User.id != current_user.id,
+        ).first()
+        if existing_user:
+            form.email.errors.append(gettext('That email address is already in use.'))
+        else:
+            operations.update(
+                id=current_user.id,
+                first_name=form.name.data.strip(),
+                last_name=form.lastname.data.strip(),
+                email=email,
+            )
+            flash(gettext('Profile updated successfully.'), 'success')
+            return redirect(url_for('auth.profile'))
+
+    return render_template('user/profile_edit.html', changeInformation=form)

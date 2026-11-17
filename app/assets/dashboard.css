@@ -508,3 +508,21 @@ body.fleet-page {
         max-width: none;
     }
 }
+
+
+.vehicle-illustration {
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.vehicle-photo {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}

@@ -28,6 +28,9 @@ class Task(db.Model):
     gasoline_type_id=db.Column(db.Integer, db.ForeignKey('gasoline.id'))
     gasoline = relationship("Gasoline", lazy="joined")
 
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    user = relationship('User', lazy='joined')
+
     tags = relationship("Tag", secondary=task_tags)
 
     @property
